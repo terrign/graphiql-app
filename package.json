@@ -8,7 +8,12 @@
     "build": "tsc && vite build",
     "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,jsx,tsx}\"",
     "preview": "vite preview",
-    "lint:fix": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,jsx,tsx}\" --fix"
+    "lint:fix": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,jsx,tsx}\" --fix",
+    "prepare": "husky install",
+    "format:fix": "prettier . --write",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
@@ -18,14 +23,22 @@
     "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.4",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.2.0",
+    "@vitest/coverage-v8": "^1.0.2",
     "eslint": "^8.55.0",
     "eslint-kit": "^10.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
+    "husky": "^8.0.3",
+    "jsdom": "^23.0.1",
     "prettier": "^3.1.0",
     "typescript": "^5.2.2",
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "vitest": "^1.0.2"
   }
 }
