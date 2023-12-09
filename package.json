@@ -15,10 +15,10 @@
     "test:run": "vitest run --coverage.enabled --coverage.all"
   },
   "lint-staged": {
-    "*.{js,css,ts,tsx,jsx}": [
+    "*.{js,ts,tsx,jsx}": [
       "npm run lint:fix"
     ],
-    "*.{js,ts,tsx,jsx}": [
+    "*.{js,ts,tsx,jsx,css}": [
       "npm run format:fix"
     ]
   },
