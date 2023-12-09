@@ -12,8 +12,15 @@
     "prepare": "husky install",
     "format:fix": "prettier . --write",
     "test": "vitest",
-    "test:run": "vitest run",
-    "coverage": "vitest run --coverage"
+    "test:run": "vitest run --coverage.enabled --coverage.all"
+  },
+  "lint-staged": {
+    "*.{js,css,ts,tsx,jsx}": [
+      "npm run lint:fix"
+    ],
+    "*.{js,ts,tsx,jsx}": [
+      "npm run format:fix"
+    ]
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
@@ -36,6 +43,7 @@
     "eslint-plugin-react-refresh": "^0.4.4",
     "husky": "^8.0.3",
     "jsdom": "^23.0.1",
+    "lint-staged": "^15.2.0",
     "prettier": "^3.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",

@@ -1,6 +1,5 @@
-/* eslint-disable import/no-default-export */
-import { resolve } from 'node:path'
-import { defineConfig } from 'vitest/config'
+import { resolve } from 'node:path';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   resolve: {
@@ -24,4 +23,4 @@ export default defineConfig({
       include: ['src/**'],
     },
   },
-})
+});
