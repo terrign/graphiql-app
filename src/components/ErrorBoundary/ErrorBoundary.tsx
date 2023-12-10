@@ -1,3 +1,4 @@
+import { Button, Result } from 'antd';
 import { Component } from 'react';
 
 interface State {
@@ -14,6 +15,10 @@ export default class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false, errorMessage: null };
   }
 
+  refreshPage = () => {
+    window.location.reload();
+  };
+
   static getDerivedStateFromError(error: Error) {
     return { hasError: true, errorMessage: error.message };
   }
@@ -21,10 +26,16 @@ export default class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <>
-          <h1>Oops something went wrong</h1>
-          <p>{this.state.errorMessage}</p>
-        </>
+        <Result
+          status="error"
+          title="Oops, something went wrong"
+          subTitle={`Error message: ${this.state.errorMessage}`}
+          extra={[
+            <Button key="console" onClick={this.refreshPage} type="primary">
+              Try to reload
+            </Button>,
+          ]}
+        />
       );
     }
 
