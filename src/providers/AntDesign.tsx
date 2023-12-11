@@ -5,7 +5,10 @@ const AntDesingProvider = ({ children }: React.PropsWithChildren) => {
     <ConfigProvider
       theme={{
         algorithm: theme.darkAlgorithm,
-        components: { Layout: { headerBg: '#292424', bodyBg: '#292424' } },
+        components: {
+          Layout: { headerBg: '#292424', bodyBg: '#292424' },
+          Spin: { colorPrimary: '#49aa19', dotSize: 26 },
+        },
         token: { colorBgBase: '#292424', fontSize: 16 },
       }}
     >

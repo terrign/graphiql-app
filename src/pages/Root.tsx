@@ -11,7 +11,7 @@ const Root = () => {
     signOut();
   };
   return (
-    <Layout style={{ minHeight: '100svh' }}>
+    <Layout style={{ height: '100dvh' }}>
       <Header>
         <nav>
           <ul>

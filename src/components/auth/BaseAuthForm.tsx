@@ -19,7 +19,7 @@ const BaseAuthForm = ({ type, loading, onSubmit, form }: AuthFormProps) => {
       </Form.Item>
 
       <Form.Item name="password" label="Password" rules={PASSWORD_INPUT_RULES} hasFeedback validateFirst>
-        <Input.Password />
+        <Input.Password allowClear={true} />
       </Form.Item>
 
       {type === 'signUp' && (
@@ -30,7 +30,7 @@ const BaseAuthForm = ({ type, loading, onSubmit, form }: AuthFormProps) => {
           hasFeedback
           rules={CONFIRM_PASSWORD_INPUT_RULES}
         >
-          <Input.Password />
+          <Input.Password allowClear={true} />
         </Form.Item>
       )}
 
@@ -38,7 +38,7 @@ const BaseAuthForm = ({ type, loading, onSubmit, form }: AuthFormProps) => {
         <Button type="primary" htmlType="submit" disabled={loading}>
           {formTypeMap[type].submitButton}
         </Button>
-        {loading && <Spin size="large" style={{ marginLeft: 30 }} />}
+        {loading && <Spin style={{ marginLeft: 30 }} />}
       </Form.Item>
 
       <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>

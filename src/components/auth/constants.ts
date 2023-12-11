@@ -5,7 +5,7 @@ const VALID_PASSWORD_MATCHER = /^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d)(?=.*[\
 const FORM_STYLE = {
   maxWidth: 700,
   width: '100%',
-  margin: '0 auto',
+  margin: '10dvh auto 0',
 };
 
 const FORM_ITEM_LAYOUT = {

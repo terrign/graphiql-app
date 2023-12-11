@@ -7,7 +7,7 @@ const NotFound = () => {
   const onClick = () => nav('/');
 
   return (
-    <Layout style={{ minHeight: '100svh', paddingTop: '10svh' }}>
+    <Layout style={{ minHeight: '100dvh', paddingTop: '10dvh' }}>
       <Result
         status="404"
         title="404"
