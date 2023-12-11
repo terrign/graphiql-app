@@ -2,6 +2,12 @@ import { Rule } from 'antd/es/form';
 
 const VALID_PASSWORD_MATCHER = /^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d)(?=.*[\W_~!@#$%^&*+]).{8,}$/;
 
+const FORM_STYLE = {
+  maxWidth: 700,
+  width: '100%',
+  margin: '0 auto',
+};
+
 const FORM_ITEM_LAYOUT = {
   labelCol: {
     sm: { span: 8 },
@@ -23,6 +29,21 @@ const TAIL_FORM_ITEM_LAYOUT = {
       span: 16,
       offset: 8,
     },
+  },
+};
+
+const formTypeMap = {
+  signUp: {
+    submitButton: 'Sign Up',
+    tailAsk: 'Already have an account?',
+    tailLink: '/auth/signin',
+    tailLinkText: 'Sign In',
+  },
+  signIn: {
+    submitButton: 'Sign In',
+    tailAsk: `Don't have an account yet?`,
+    tailLink: '/auth/signup',
+    tailLinkText: 'Sign Up',
   },
 };
 
@@ -76,6 +97,8 @@ export {
   CONFIRM_PASSWORD_INPUT_RULES,
   EMAIL_INPUT_RULES,
   FORM_ITEM_LAYOUT,
+  FORM_STYLE,
+  formTypeMap,
   PASSWORD_INPUT_RULES,
   TAIL_FORM_ITEM_LAYOUT,
 };

@@ -1,19 +1,15 @@
-import { App, Button, Form, Input, Typography } from 'antd';
+import { App, Form } from 'antd';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
 import { auth } from '../../../auth';
-import { EMAIL_INPUT_RULES, FORM_ITEM_LAYOUT, PASSWORD_INPUT_RULES, TAIL_FORM_ITEM_LAYOUT } from '../constants';
 import { useEffect } from 'react';
+import AuthForm from '../BaseAuthForm';
+import { useNavigate } from 'react-router-dom';
 
 const SignInForm = () => {
+  const [signIn, , loading, error] = useSignInWithEmailAndPassword(auth);
   const [form] = Form.useForm();
-  const [signIn, _, , error] = useSignInWithEmailAndPassword(auth);
   const { notification } = App.useApp();
-
-  const onFinish = async () => {
-    const { email, password } = form.getFieldsValue();
-    signIn(email, password);
-  };
+  const nav = useNavigate();
 
   useEffect(() => {
     if (error) {
@@ -25,39 +21,15 @@ const SignInForm = () => {
     }
   }, [error, notification]);
 
-  return (
-    <Form
-      {...FORM_ITEM_LAYOUT}
-      form={form}
-      name="signin"
-      onFinish={onFinish}
-      style={{
-        maxWidth: 700,
-        width: '100%',
-        margin: '0 auto',
-      }}
-    >
-      <Form.Item name="email" label="E-mail" rules={EMAIL_INPUT_RULES}>
-        <Input />
-      </Form.Item>
+  const onSubmit = async () => {
+    const { email, password } = form.getFieldsValue();
+    const res = await signIn(email, password);
+    if (res) {
+      nav('/main');
+    }
+  };
 
-      <Form.Item name="password" label="Password" rules={[PASSWORD_INPUT_RULES[0]]}>
-        <Input.Password autoComplete="asdfasdfasdf" />
-      </Form.Item>
-
-      <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
-        <Button type="primary" htmlType="submit">
-          Sign In
-        </Button>
-      </Form.Item>
-
-      <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
-        <Typography.Paragraph>
-          Don't have an account yet? <Link to="/auth/signup">Sign Up</Link>
-        </Typography.Paragraph>
-      </Form.Item>
-    </Form>
-  );
+  return <AuthForm type="signIn" onSubmit={onSubmit} loading={loading} form={form} />;
 };
 
 export default SignInForm;
