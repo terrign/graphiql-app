@@ -1,5 +1,4 @@
 import { RouteObject } from 'react-router-dom';
-import Auth from '../pages/Auth';
 import Main from '../pages/Main';
 import NotFound from '../pages/NotFound';
 import Root from '../pages/Root';
@@ -24,19 +23,14 @@ const routes: RouteObject[] = [
         loader: mainLoader,
       },
       {
-        path: '/auth',
-        element: <Auth />,
+        path: '/signup',
+        element: <SingUp />,
         loader: authLoader,
-        children: [
-          {
-            path: '/auth/signup',
-            element: <SingUp />,
-          },
-          {
-            path: '/auth/signin',
-            element: <SignIn />,
-          },
-        ],
+      },
+      {
+        path: '/signin',
+        element: <SignIn />,
+        loader: authLoader,
       },
     ],
   },
