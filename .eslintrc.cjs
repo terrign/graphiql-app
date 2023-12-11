@@ -12,6 +12,7 @@ module.exports = configure({
       'react/sort-comp': 'off',
       'react/state-in-constructor': 'off',
       'react/destructuring-assignment': 'off',
+      'react/no-array-index-key': 'off',
     },
   },
 });
