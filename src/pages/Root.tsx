@@ -5,7 +5,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 const Root = () => {
   return (
     <Layout style={{ height: '100vh' }}>
-      <Header style={{ backgroundColor: 'white' }}>
+      <Header>
         <nav>
           <ul>
             <Flex gap={30}>
@@ -16,16 +16,16 @@ const Root = () => {
                 <NavLink to="/main">Main</NavLink>
               </li>
               <li>
-                <NavLink to="/signin">SingIn</NavLink>
+                <NavLink to="/auth/signin">SingIn</NavLink>
               </li>
               <li>
-                <NavLink to="/signup">SingUp</NavLink>
+                <NavLink to="/auth/signup">SingUp</NavLink>
               </li>
             </Flex>
           </ul>
         </nav>
       </Header>
-      <Layout>
+      <Layout style={{ padding: 20 }}>
         <Outlet />
       </Layout>
       <Footer>Footer</Footer>
