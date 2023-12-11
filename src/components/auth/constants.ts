@@ -36,13 +36,13 @@ const formTypeMap = {
   signUp: {
     submitButton: 'Sign Up',
     tailAsk: 'Already have an account?',
-    tailLink: '/auth/signin',
+    tailLink: '/signin',
     tailLinkText: 'Sign In',
   },
   signIn: {
     submitButton: 'Sign In',
     tailAsk: `Don't have an account yet?`,
-    tailLink: '/auth/signup',
+    tailLink: '/signup',
     tailLinkText: 'Sign Up',
   },
 };
