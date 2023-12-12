@@ -1,6 +1,7 @@
 import { Flex, Layout } from 'antd';
-import { Footer, Header } from 'antd/es/layout/layout';
+import { Header } from 'antd/es/layout/layout';
 import { NavLink, Outlet } from 'react-router-dom';
+import AppFooter from '../components/Footer/Footer';
 
 const Root = () => {
   return (
@@ -28,7 +29,7 @@ const Root = () => {
       <Layout>
         <Outlet />
       </Layout>
-      <Footer />
+      <AppFooter />
     </Layout>
   );
 };

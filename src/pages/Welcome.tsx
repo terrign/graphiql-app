@@ -5,7 +5,7 @@ import Text from 'antd/es/typography/Text';
 import Title from 'antd/es/typography/Title';
 import githubSVG from '../assets/github.svg';
 
-const info = [
+export const info = [
   {
     name: 'Alexey Filipovich',
     githubLink: 'https://github.com/terrign',
