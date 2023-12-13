@@ -4,21 +4,7 @@ import Paragraph from 'antd/es/typography/Paragraph';
 import Text from 'antd/es/typography/Text';
 import Title from 'antd/es/typography/Title';
 import githubSVG from '../assets/github.svg';
-
-export const info = [
-  {
-    name: 'Alexey Filipovich',
-    githubLink: 'https://github.com/terrign',
-  },
-  {
-    name: 'Andrei Zetsmanis',
-    githubLink: 'https://github.com/anderskambenders',
-  },
-  {
-    name: 'Yuliya Chekan',
-    githubLink: 'https://github.com/juliabel5',
-  },
-];
+import { developersInfo } from '../utils/developersInfo';
 
 const Welcome = () => {
   return (
@@ -44,7 +30,7 @@ const Welcome = () => {
       <Title level={2}>Our team</Title>
       <Paragraph>
         <ul>
-          {info.map((dev, ind) => {
+          {developersInfo.map((dev, ind) => {
             return (
               <li key={`dev-info${ind}`}>
                 <Text code>{dev.name}</Text>

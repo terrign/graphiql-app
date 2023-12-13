@@ -13,6 +13,7 @@ module.exports = configure({
       'react/state-in-constructor': 'off',
       'react/destructuring-assignment': 'off',
       'react/no-array-index-key': 'off',
+      'unicorn/prefer-add-event-listener': 'off',
     },
   },
 });
