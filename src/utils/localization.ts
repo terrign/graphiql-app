@@ -2,7 +2,7 @@ export const localization = {
   ru: {
     buttonLabel: 'Отправить запрос',
   },
-  eng: {
+  en: {
     buttonLabel: 'Submit query',
   },
 };
