@@ -1,11 +1,18 @@
 import { Flex, Layout } from 'antd';
 import { Footer, Header } from 'antd/es/layout/layout';
+import { useSignOut } from 'react-firebase-hooks/auth';
 import { NavLink, Outlet } from 'react-router-dom';
+import { auth } from '../auth';
 
 const Root = () => {
+  const [signOut] = useSignOut(auth);
+
+  const onclick = () => {
+    signOut();
+  };
   return (
-    <Layout style={{ height: '100vh' }}>
-      <Header style={{ backgroundColor: 'white' }}>
+    <Layout style={{ height: '100dvh' }}>
+      <Header>
         <nav>
           <ul>
             <Flex gap={30}>
@@ -21,11 +28,14 @@ const Root = () => {
               <li>
                 <NavLink to="/signup">SingUp</NavLink>
               </li>
+              <li>
+                <button onClick={onclick}>signOut</button>
+              </li>
             </Flex>
           </ul>
         </nav>
       </Header>
-      <Layout>
+      <Layout style={{ padding: 20 }}>
         <Outlet />
       </Layout>
       <Footer>Footer</Footer>
