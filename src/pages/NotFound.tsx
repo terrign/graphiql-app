@@ -1,11 +1,7 @@
 import { Button, Layout, Result } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const NotFound = () => {
-  const nav = useNavigate();
-
-  const onClick = () => nav('/');
-
   return (
     <Layout style={{ minHeight: '100dvh', paddingTop: '10dvh' }}>
       <Result
@@ -13,12 +9,12 @@ const NotFound = () => {
         title="404"
         subTitle="Sorry, the page you visited does not exist."
         extra={
-          <Button type="primary" onClick={onClick}>
-            Back Home
-          </Button>
+          <NavLink to="/">
+            <Button type="primary">Back Home</Button>
+          </NavLink>
         }
-      />
-    </Layout>
+    />
+   </Layout>  
   );
 };
 

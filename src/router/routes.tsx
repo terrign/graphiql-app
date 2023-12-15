@@ -1,4 +1,5 @@
 import { RouteObject } from 'react-router-dom';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import Main from '../pages/Main';
 import NotFound from '../pages/NotFound';
 import Root from '../pages/Root';
@@ -11,7 +12,11 @@ import mainLoader from './loaders/main';
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Root />,
+    element: (
+      <ErrorBoundary>
+        <Root />
+      </ErrorBoundary>
+    ),
     children: [
       {
         path: '/',

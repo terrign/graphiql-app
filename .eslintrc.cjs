@@ -6,6 +6,14 @@ module.exports = configure({
   presets: [presets.imports(), presets.node(), presets.prettier(), presets.typescript(), presets.react()],
 
   extend: {
-    rules: { 'import/no-default-export': 'off', 'no-console': 'warn', 'simple-import-sort/imports': 'off' },
+    rules: {
+      'import/no-default-export': 'off',
+      'no-console': 'warn',
+      'react/sort-comp': 'off',
+      'react/state-in-constructor': 'off',
+      'react/destructuring-assignment': 'off',
+      'react/no-array-index-key': 'off',
+      'unicorn/prefer-add-event-listener': 'off',
+    },
   },
 });
