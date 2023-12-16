@@ -18,7 +18,13 @@ const BaseAuthForm = ({ type, loading, onSubmit, form }: AuthFormProps) => {
         <Input />
       </Form.Item>
 
-      <Form.Item name="password" label="Password" rules={PASSWORD_INPUT_RULES} hasFeedback validateFirst>
+      <Form.Item
+        name="password"
+        label="Password"
+        rules={type === 'signUp' ? PASSWORD_INPUT_RULES : undefined}
+        hasFeedback
+        validateFirst
+      >
         <Input.Password allowClear={true} />
       </Form.Item>
 

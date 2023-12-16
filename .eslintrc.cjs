@@ -14,6 +14,7 @@ module.exports = configure({
       'react/destructuring-assignment': 'off',
       'react/no-array-index-key': 'off',
       'unicorn/prefer-add-event-listener': 'off',
+      'simple-import-sort/imports': 'off',
     },
   },
 });
