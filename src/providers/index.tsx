@@ -1,10 +1,13 @@
+import { LocalizationProvider } from '../store/context';
 import AntDesingProvider from './AntDesign';
 import StoreProvider from './Store';
 
 const Providers = ({ children }: React.PropsWithChildren) => {
   return (
     <StoreProvider>
-      <AntDesingProvider>{children}</AntDesingProvider>
+      <LocalizationProvider>
+        <AntDesingProvider>{children}</AntDesingProvider>
+      </LocalizationProvider>
     </StoreProvider>
   );
 };
