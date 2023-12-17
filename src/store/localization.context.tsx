@@ -45,7 +45,7 @@ export const LocalizationProvider = ({ children }: LocalizationProviderProps) =>
       changeLanguage,
       t: _localization,
     };
-  }, [lang]);
+  }, [lang, changeLanguage]);
 
   return <LocalizationContext.Provider value={value}>{children}</LocalizationContext.Provider>;
 };

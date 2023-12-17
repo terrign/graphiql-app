@@ -1,8 +1,8 @@
+import { Form } from 'antd';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../auth';
 import AuthForm from '../BaseAuthForm';
-import { useNavigate } from 'react-router-dom';
-import { Form } from 'antd';
 
 const SignUpForm = () => {
   const [signUp, , loading] = useCreateUserWithEmailAndPassword(auth);

@@ -1,14 +1,14 @@
 import { Button, Form, Input, Spin, Typography } from 'antd';
+import { Link } from 'react-router-dom';
 import {
   CONFIRM_PASSWORD_INPUT_RULES,
   EMAIL_INPUT_RULES,
   FORM_ITEM_LAYOUT,
   FORM_STYLE,
+  formTypeMap,
   PASSWORD_INPUT_RULES,
   TAIL_FORM_ITEM_LAYOUT,
-  formTypeMap,
 } from './constants';
-import { Link } from 'react-router-dom';
 import { AuthFormProps } from './types';
 
 const BaseAuthForm = ({ type, loading, onSubmit, form }: AuthFormProps) => {

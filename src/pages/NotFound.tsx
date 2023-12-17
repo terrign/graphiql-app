@@ -13,8 +13,8 @@ const NotFound = () => {
             <Button type="primary">Back Home</Button>
           </NavLink>
         }
-    />
-   </Layout>  
+      />
+    </Layout>
   );
 };
 
