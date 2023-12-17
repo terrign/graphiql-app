@@ -19,7 +19,7 @@ const AppFooter = () => {
             );
           })}
         </Space>
-        <Title level={5} style={{ margin: 'auto' }}>
+        <Title className="footer-title" level={5} style={{ margin: 'auto' }}>
           React RSS 2023
         </Title>
         <Link href="https://rs.school/react/">

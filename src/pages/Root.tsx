@@ -4,10 +4,28 @@ import { Header } from 'antd/es/layout/layout';
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import AppFooter from '../components/Footer/Footer';
+import { useLocalization } from '../store/context';
+import { useIdToken } from 'react-firebase-hooks/auth';
+import { auth } from '../auth';
 
 const Root = () => {
   const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const localization = useLocalization();
+  const [user] = useIdToken(auth);
+  const items = [
+    { key: '/', elem: <NavLink to="/">{localization.text['nav-links'][0]}</NavLink> },
+    { key: '/main', elem: <NavLink to="/main">{localization.text['nav-links'][1]}</NavLink> },
+    { key: '/signin', elem: <NavLink to="/signin">{localization.text['nav-links'][2]}</NavLink> },
+    { key: '/signup', elem: <NavLink to="/signup">{localization.text['nav-links'][3]}</NavLink> },
+  ];
+  const [menuItems, setMenuItems] = useState(items);
+
+  useEffect(() => {
+    if (user) {
+      setMenuItems(items.slice(0, 2));
+    }
+  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => (window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false));
@@ -16,13 +34,6 @@ const Root = () => {
       window.onscroll = null;
     };
   }, []);
-
-  const items = [
-    { key: '/', elem: <NavLink to="/">Welcome</NavLink> },
-    { key: '/main', elem: <NavLink to="/main">Main</NavLink> },
-    { key: '/signin', elem: <NavLink to="/signin">SingIn</NavLink> },
-    { key: '/signup', elem: <NavLink to="/signup">SingUp</NavLink> },
-  ];
 
   return (
     <Layout style={{ minHeight: '100dvh' }}>
@@ -33,13 +44,18 @@ const Root = () => {
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={[pathname]}
-            items={items.map((item) => ({ key: item.key, label: item.elem }))}
+            items={menuItems.map((item) => ({ key: item.key, label: item.elem }))}
             style={{
               flex: 1,
               minWidth: 0,
             }}
           />
-          <Switch checkedChildren="en" unCheckedChildren="ru" defaultChecked />
+          <Switch
+            onChange={(e) => localization.changeLanguage(e.valueOf() ? 'en' : 'ru')}
+            checkedChildren="en"
+            unCheckedChildren="ru"
+            defaultChecked
+          />
         </Flex>
       </Header>
       <Layout style={{ padding: 20 }}>

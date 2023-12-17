@@ -10,7 +10,7 @@ interface LanguageProviderProps {
 interface LanguageContextType {
   lang: string;
   changeLanguage: React.Dispatch<React.SetStateAction<'ru' | 'en'>>;
-  t: LocalizationType;
+  text: LocalizationType;
 }
 
 export const LanguageContext = createContext<LanguageContextType | null>(null);
@@ -34,7 +34,7 @@ export const LocalizationProvider = ({ children }: LanguageProviderProps) => {
   const value = {
     lang,
     changeLanguage: setLang,
-    t: _localization,
+    text: _localization,
   };
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
