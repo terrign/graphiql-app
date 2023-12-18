@@ -15,14 +15,14 @@ const Root = () => {
   const localization = useLocalization();
   const [user] = useIdToken(auth);
   const anonMenuItems = [
-    { key: '/', elem: <NavLink to="/">{localization.text['nav-links'][0]}</NavLink> },
-    { key: '/main', elem: <NavLink to="/main">{localization.text['nav-links'][1]}</NavLink> },
-    { key: '/signin', elem: <NavLink to="/signin">{localization.text['nav-links'][2]}</NavLink> },
-    { key: '/signup', elem: <NavLink to="/signup">{localization.text['nav-links'][3]}</NavLink> },
+    { key: '/', elem: <NavLink to="/">{localization.t['nav-links'][0]}</NavLink> },
+    { key: '/main', elem: <NavLink to="/main">{localization.t['nav-links'][1]}</NavLink> },
+    { key: '/signin', elem: <NavLink to="/signin">{localization.t['nav-links'][2]}</NavLink> },
+    { key: '/signup', elem: <NavLink to="/signup">{localization.t['nav-links'][3]}</NavLink> },
   ];
   const authMenuItems = [
-    { key: '/', elem: <NavLink to="/">{localization.text['nav-links'][0]}</NavLink> },
-    { key: '/main', elem: <NavLink to="/main">{localization.text['nav-links'][1]}</NavLink> },
+    { key: '/', elem: <NavLink to="/">{localization.t['nav-links'][0]}</NavLink> },
+    { key: '/main', elem: <NavLink to="/main">{localization.t['nav-links'][1]}</NavLink> },
     { key: '/signout', elem: <Button onClick={() => signOut(auth)}>SignOut</Button> },
   ];
   const [menuItems, setMenuItems] = useState<

@@ -12,22 +12,22 @@ const Welcome = () => {
   return (
     <Layout>
       <Typography />
-      <Title>{localization.text['welcome-page/title']}</Title>
-      <Paragraph>{localization.text['welcome-page/paragraph1']}</Paragraph>
+      <Title>{localization.t['welcome-page/title']}</Title>
+      <Paragraph>{localization.t['welcome-page/paragraph1']}</Paragraph>
       <Paragraph>
-        {localization.text['welcome-page/paragraph2']}
+        {localization.t['welcome-page/paragraph2']}
         <Paragraph>
-          <Text strong>{localization.text['welcome-page/paragraph3']}</Text>
+          <Text strong>{localization.t['welcome-page/paragraph3']}</Text>
         </Paragraph>
       </Paragraph>
       <Divider />
-      <Title level={2}>{localization.text['welcome-page/team-title']}</Title>
+      <Title level={2}>{localization.t['welcome-page/team-title']}</Title>
       <Paragraph>
         <ul>
           {developersInfo.map((dev, ind) => {
             return (
               <li key={`dev-info${ind}`}>
-                <Text code>{localization.text['dev-names'][ind]}</Text>
+                <Text code>{localization.t['dev-names'][ind]}</Text>
                 <Link href={dev.githubLink} style={{ margin: 0 }}>
                   <img src={githubSVG} alt="github-logo" style={{ width: 23, paddingLeft: 10 }} />
                 </Link>
