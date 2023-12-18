@@ -27,6 +27,7 @@ export default class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <Result
+          style={{ backgroundColor: '#292424', height: '100dvh' }}
           status="error"
           title="Oops, something went wrong"
           subTitle={`Error message: ${this.state.errorMessage}`}

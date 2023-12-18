@@ -1,5 +1,5 @@
 import './root.css';
-import { Flex, Layout, Menu, Switch } from 'antd';
+import { Button, Flex, Layout, Menu, Switch } from 'antd';
 import { Header } from 'antd/es/layout/layout';
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
@@ -7,23 +7,36 @@ import AppFooter from '../components/Footer/Footer';
 import { useLocalization } from '../store/context';
 import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from '../auth';
+import { signOut } from 'firebase/auth';
 
 const Root = () => {
   const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const localization = useLocalization();
   const [user] = useIdToken(auth);
-  const items = [
+  const anonMenuItems = [
     { key: '/', elem: <NavLink to="/">{localization.text['nav-links'][0]}</NavLink> },
     { key: '/main', elem: <NavLink to="/main">{localization.text['nav-links'][1]}</NavLink> },
     { key: '/signin', elem: <NavLink to="/signin">{localization.text['nav-links'][2]}</NavLink> },
     { key: '/signup', elem: <NavLink to="/signup">{localization.text['nav-links'][3]}</NavLink> },
   ];
-  const [menuItems, setMenuItems] = useState(items);
+  const authMenuItems = [
+    { key: '/', elem: <NavLink to="/">{localization.text['nav-links'][0]}</NavLink> },
+    { key: '/main', elem: <NavLink to="/main">{localization.text['nav-links'][1]}</NavLink> },
+    { key: '/signout', elem: <Button onClick={() => signOut(auth)}>SignOut</Button> },
+  ];
+  const [menuItems, setMenuItems] = useState<
+    {
+      key: string;
+      elem: JSX.Element;
+    }[]
+  >(anonMenuItems.slice(0, 2));
 
   useEffect(() => {
     if (user) {
-      setMenuItems(items.slice(0, 2));
+      setMenuItems(authMenuItems);
+    } else {
+      setMenuItems(anonMenuItems);
     }
   }, [user]);
 
