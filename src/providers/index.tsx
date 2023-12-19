@@ -1,4 +1,4 @@
-import { LocalizationProvider } from '../store/context';
+import { LocalizationProvider } from '../store/localization.context';
 import AntDesingProvider from './AntDesign';
 import StoreProvider from './Store';
 

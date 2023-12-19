@@ -3,8 +3,8 @@ import { AuthFormValues } from './types';
 import { AuthError, UserCredential } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useLocalization } from '../../store/context';
-import { ErrorCode } from '../../utils/localization';
+import { useLocalization } from '../../store/localization.context';
+import { ErrorCode } from '../../store/localization';
 
 interface UseAuthFormProps {
   form: FormInstance<AuthFormValues>;
