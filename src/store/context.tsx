@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { localization } from './localization';
+import { localization } from '../utils/localization';
 
 type LocalizationType = (typeof localization)['ru'];
 // Пропсы для LanguageProvider
@@ -9,13 +9,13 @@ interface LanguageProviderProps {
 
 interface LanguageContextType {
   lang: string;
-  changeLanguage: React.Dispatch<React.SetStateAction<'ru' | 'eng'>>;
+  changeLanguage: React.Dispatch<React.SetStateAction<'ru' | 'en'>>;
   t: LocalizationType;
 }
 
 export const LanguageContext = createContext<LanguageContextType | null>(null);
 
-export const useLanguage = () => {
+export const useLocalization = () => {
   const context = useContext(LanguageContext);
   if (!context) {
     throw new Error('useLanguage must be used within a LanguageProvider');
@@ -24,8 +24,8 @@ export const useLanguage = () => {
 };
 
 // Компонент провайдера языка
-export const LanguageProvider = ({ children }: LanguageProviderProps) => {
-  const [lang, setLang] = useState<'ru' | 'eng'>('ru');
+export const LocalizationProvider = ({ children }: LanguageProviderProps) => {
+  const [lang, setLang] = useState<'ru' | 'en'>('en');
 
   // Подгрузка локализации для текущего языка
   const _localization = localization[lang];

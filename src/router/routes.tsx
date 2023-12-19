@@ -3,10 +3,10 @@ import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import Main from '../pages/Main';
 import NotFound from '../pages/NotFound';
 import Root from '../pages/Root';
+import SignIn from '../pages/SignIn';
+import SingUp from '../pages/SingUp';
 import Welcome from '../pages/Welcome';
 import authLoader from './loaders/auth';
-import SingUp from '../pages/SingUp';
-import SignIn from '../pages/SignIn';
 import mainLoader from './loaders/main';
 
 const routes: RouteObject[] = [

@@ -1,4 +1,4 @@
-import { Divider, Typography } from 'antd';
+import { Divider, Layout, Typography } from 'antd';
 import Link from 'antd/es/typography/Link';
 import Paragraph from 'antd/es/typography/Paragraph';
 import Text from 'antd/es/typography/Text';
@@ -8,7 +8,7 @@ import { developersInfo } from '../utils/developersInfo';
 
 const Welcome = () => {
   return (
-    <>
+    <Layout>
       <Typography />
       <Title>Welcome Page</Title>
       <Paragraph>
@@ -44,7 +44,7 @@ const Welcome = () => {
       </Paragraph>
       <Divider />
       <Typography />
-    </>
+    </Layout>
   );
 };
 
