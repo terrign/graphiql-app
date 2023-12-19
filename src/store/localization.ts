@@ -61,6 +61,7 @@ export const localization: { ru: Localization; en: Localization } = {
       message: 'Email already in use',
       description: 'An account with this email is already in use. If the email belongs to you, try to restore access',
     },
+
     'welcome-page/title': 'Welcome page',
     'welcome-page/paragraph1':
       'This is final task for course React Rs School. GraphiQL is a frontend application for GraphQL that allows developers to query and manipulate data from their backend server through an intuitive user interface.',
