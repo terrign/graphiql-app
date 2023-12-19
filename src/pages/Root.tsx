@@ -4,7 +4,7 @@ import { Header } from 'antd/es/layout/layout';
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import AppFooter from '../components/Footer/Footer';
-import { useLocalization } from '../store/context';
+import { useLocalization } from '../store/localization.context';
 import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from '../auth';
 import { signOut } from 'firebase/auth';

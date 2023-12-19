@@ -5,7 +5,7 @@ import Text from 'antd/es/typography/Text';
 import Title from 'antd/es/typography/Title';
 import githubSVG from '../assets/github.svg';
 import { developersInfo } from '../utils/developersInfo';
-import { useLocalization } from '../store/context';
+import { useLocalization } from '../store/localization.context';
 
 const Welcome = () => {
   const localization = useLocalization();
