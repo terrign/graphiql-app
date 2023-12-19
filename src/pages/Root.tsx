@@ -1,13 +1,44 @@
 import './root.css';
-import { Flex, Layout, Menu, Switch } from 'antd';
+import { Button, Flex, Layout, Menu, Switch } from 'antd';
 import { Header } from 'antd/es/layout/layout';
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import AppFooter from '../components/Footer/Footer';
+import { useLocalization } from '../store/localization.context';
+import { useIdToken } from 'react-firebase-hooks/auth';
+import { auth } from '../auth';
+import { signOut } from 'firebase/auth';
 
 const Root = () => {
   const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const localization = useLocalization();
+  const [user] = useIdToken(auth);
+  const anonMenuItems = [
+    { key: '/', elem: <NavLink to="/">{localization.t['nav-links'][0]}</NavLink> },
+    { key: '/main', elem: <NavLink to="/main">{localization.t['nav-links'][1]}</NavLink> },
+    { key: '/signin', elem: <NavLink to="/signin">{localization.t['nav-links'][2]}</NavLink> },
+    { key: '/signup', elem: <NavLink to="/signup">{localization.t['nav-links'][3]}</NavLink> },
+  ];
+  const authMenuItems = [
+    { key: '/', elem: <NavLink to="/">{localization.t['nav-links'][0]}</NavLink> },
+    { key: '/main', elem: <NavLink to="/main">{localization.t['nav-links'][1]}</NavLink> },
+    { key: '/signout', elem: <Button onClick={() => signOut(auth)}>SignOut</Button> },
+  ];
+  const [menuItems, setMenuItems] = useState<
+    {
+      key: string;
+      elem: JSX.Element;
+    }[]
+  >(anonMenuItems.slice(0, 2));
+
+  useEffect(() => {
+    if (user) {
+      setMenuItems(authMenuItems);
+    } else {
+      setMenuItems(anonMenuItems);
+    }
+  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => (window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false));
@@ -16,13 +47,6 @@ const Root = () => {
       window.onscroll = null;
     };
   }, []);
-
-  const items = [
-    { key: '/', elem: <NavLink to="/">Welcome</NavLink> },
-    { key: '/main', elem: <NavLink to="/main">Main</NavLink> },
-    { key: '/signin', elem: <NavLink to="/signin">SingIn</NavLink> },
-    { key: '/signup', elem: <NavLink to="/signup">SingUp</NavLink> },
-  ];
 
   return (
     <Layout style={{ minHeight: '100dvh' }}>
@@ -33,13 +57,18 @@ const Root = () => {
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={[pathname]}
-            items={items.map((item) => ({ key: item.key, label: item.elem }))}
+            items={menuItems.map((item) => ({ key: item.key, label: item.elem }))}
             style={{
               flex: 1,
               minWidth: 0,
             }}
           />
-          <Switch checkedChildren="en" unCheckedChildren="ru" defaultChecked />
+          <Switch
+            onChange={(e) => localization.changeLanguage(e.valueOf() ? 'en' : 'ru')}
+            checkedChildren="en"
+            unCheckedChildren="ru"
+            defaultChecked
+          />
         </Flex>
       </Header>
       <Layout style={{ padding: 20 }}>

@@ -5,35 +5,29 @@ import Text from 'antd/es/typography/Text';
 import Title from 'antd/es/typography/Title';
 import githubSVG from '../assets/github.svg';
 import { developersInfo } from '../utils/developersInfo';
+import { useLocalization } from '../store/localization.context';
 
 const Welcome = () => {
+  const localization = useLocalization();
   return (
     <Layout>
       <Typography />
-      <Title>Welcome Page</Title>
+      <Title>{localization.t['welcome-page/title']}</Title>
+      <Paragraph>{localization.t['welcome-page/paragraph1']}</Paragraph>
       <Paragraph>
-        This is final task for course React Rs School. GraphiQL is a frontend application for GraphQL that allows
-        developers to query and manipulate data from their backend server through an intuitive user interface.
-      </Paragraph>
-      <Paragraph>
-        We are looking for new technologies and ready to use them on the go in our projects. We used workload
-        segregation by tasks instead of segregation by areas therefore everyone made his own income to every feature in
-        this project.
+        {localization.t['welcome-page/paragraph2']}
         <Paragraph>
-          <Text strong>
-            We are ready to help each other on demand. We can spread out to investigate as much as possible and get
-            together to share our knowledge.
-          </Text>
+          <Text strong>{localization.t['welcome-page/paragraph3']}</Text>
         </Paragraph>
       </Paragraph>
       <Divider />
-      <Title level={2}>Our team</Title>
+      <Title level={2}>{localization.t['welcome-page/team-title']}</Title>
       <Paragraph>
         <ul>
           {developersInfo.map((dev, ind) => {
             return (
               <li key={`dev-info${ind}`}>
-                <Text code>{dev.name}</Text>
+                <Text code>{localization.t['dev-names'][ind]}</Text>
                 <Link href={dev.githubLink} style={{ margin: 0 }}>
                   <img src={githubSVG} alt="github-logo" style={{ width: 23, paddingLeft: 10 }} />
                 </Link>
