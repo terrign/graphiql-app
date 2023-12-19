@@ -30,7 +30,7 @@ export const useLocalization = () => {
 };
 
 export const LocalizationProvider = ({ children }: LocalizationProviderProps) => {
-  const [lang, setLang] = useState<Lang>(_lang ?? 'ru');
+  const [lang, setLang] = useState<Lang>(_lang ?? 'en');
 
   const changeLanguage = useCallback((value: Lang) => {
     localStorage.setItem('lang', value);

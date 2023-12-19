@@ -25,7 +25,7 @@ const Root = () => {
   ];
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ minHeight: '100dvh' }}>
       <Header className={`header ${isScrolled && 'scrolled'}`}>
         <Flex align="center">
           <Menu
@@ -42,7 +42,7 @@ const Root = () => {
           <Switch checkedChildren="en" unCheckedChildren="ru" defaultChecked />
         </Flex>
       </Header>
-      <Layout style={{ backgroundColor: '#fff', padding: 20 }}>
+      <Layout style={{ padding: 20 }}>
         <Outlet />
       </Layout>
       <AppFooter />
