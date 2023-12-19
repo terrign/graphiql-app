@@ -14,13 +14,13 @@ const Root = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const localization = useLocalization();
   const [user] = useIdToken(auth);
-  const anonMenuItems = () => [
+  const anonMenuItems = [
     { key: '/', elem: <NavLink to="/">{localization.t['nav-links'][0]}</NavLink> },
     { key: '/main', elem: <NavLink to="/main">{localization.t['nav-links'][1]}</NavLink> },
     { key: '/signin', elem: <NavLink to="/signin">{localization.t['nav-links'][2]}</NavLink> },
     { key: '/signup', elem: <NavLink to="/signup">{localization.t['nav-links'][3]}</NavLink> },
   ];
-  const authMenuItems = () => [
+  const authMenuItems = [
     { key: '/', elem: <NavLink to="/">{localization.t['nav-links'][0]}</NavLink> },
     { key: '/main', elem: <NavLink to="/main">{localization.t['nav-links'][1]}</NavLink> },
     { key: '/signout', elem: <Button onClick={() => signOut(auth)}>SignOut</Button> },
@@ -30,15 +30,15 @@ const Root = () => {
       key: string;
       elem: JSX.Element;
     }[]
-  >(anonMenuItems().slice(0, 2));
+  >(anonMenuItems.slice(0, 2));
 
   useEffect(() => {
     if (user) {
-      setMenuItems(authMenuItems());
+      setMenuItems(authMenuItems);
     } else {
-      setMenuItems(anonMenuItems());
+      setMenuItems(anonMenuItems);
     }
-  }, [user]);
+  }, [user, localization.lang]);
 
   useEffect(() => {
     const handleScroll = () => (window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false));
@@ -56,6 +56,7 @@ const Root = () => {
             className={isScrolled ? 'scrolled' : ''}
             theme="dark"
             mode="horizontal"
+            selectedKeys={[pathname]}
             defaultSelectedKeys={[pathname]}
             items={menuItems.map((item) => ({ key: item.key, label: item.elem }))}
             style={{
