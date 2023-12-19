@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { localization } from '../utils/localization';
+import { localization } from './localization';
 
 type LocalizationType = (typeof localization)['ru'];
 // Пропсы для LanguageProvider
