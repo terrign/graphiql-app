@@ -9,6 +9,7 @@ import { auth } from '../../auth';
 
 const AppHeader = () => {
   const localization = useLocalization();
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { pathname } = useLocation();
   const [user] = useIdToken(auth);
@@ -24,8 +25,8 @@ const AppHeader = () => {
     } else {
       setMenuItems(createMenuItems(false, localization.t['nav-links']));
     }
-  }, [user, localization.lang]);
-
+    setIsUserLoaded(true);
+  }, [user, isUserLoaded, localization.lang]);
   useEffect(() => {
     const handleScroll = () => (window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false));
     window.onscroll = handleScroll;
@@ -35,28 +36,30 @@ const AppHeader = () => {
   }, []);
 
   return (
-    <Header className={`header ${isScrolled && 'scrolled'}`}>
-      <Flex align="center">
-        <Menu
-          className={isScrolled ? 'scrolled' : ''}
-          theme="dark"
-          mode="horizontal"
-          selectedKeys={[pathname]}
-          defaultSelectedKeys={[pathname]}
-          items={menuItems.map((item) => ({ key: item.key, label: item.elem }))}
-          style={{
-            flex: 1,
-            minWidth: 0,
-          }}
-        />
-        <Switch
-          onChange={(e) => localization.changeLanguage(e.valueOf() ? 'en' : 'ru')}
-          checkedChildren="en"
-          unCheckedChildren="ru"
-          defaultChecked={localization.lang === 'en'}
-        />
-      </Flex>
-    </Header>
+    isUserLoaded && (
+      <Header className={`header ${isScrolled && 'scrolled'}`}>
+        <Flex align="center">
+          <Menu
+            className={isScrolled ? 'scrolled' : ''}
+            theme="dark"
+            mode="horizontal"
+            selectedKeys={[pathname]}
+            defaultSelectedKeys={[pathname]}
+            items={menuItems.map((item) => ({ key: item.key, label: item.elem }))}
+            style={{
+              flex: 1,
+              minWidth: 0,
+            }}
+          />
+          <Switch
+            onChange={(e) => localization.changeLanguage(e.valueOf() ? 'en' : 'ru')}
+            checkedChildren="en"
+            unCheckedChildren="ru"
+            defaultChecked={localization.lang === 'en'}
+          />
+        </Flex>
+      </Header>
+    )
   );
 };
 export default AppHeader;
