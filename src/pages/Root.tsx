@@ -49,7 +49,7 @@ const Root = () => {
   }, []);
 
   return (
-    <Layout style={{ minHeight: '100dvh' }}>
+    <Layout style={{ minHeight: '100dvh', height: '100dvh' }}>
       <Header className={`header ${isScrolled && 'scrolled'}`}>
         <Flex align="center">
           <Menu
