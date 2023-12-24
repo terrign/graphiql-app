@@ -13,7 +13,7 @@ const AppFooter = () => {
         <Space>
           {developersInfo.map((dev, ind) => {
             return (
-              <Link key={ind} href={dev.githubLink}>
+              <Link key={ind} href={dev.githubLink} target="blank" data-testid="link">
                 <img src={githubSVG} alt="github-logo" style={{ width: 23, paddingLeft: 10 }} />
               </Link>
             );
@@ -22,7 +22,7 @@ const AppFooter = () => {
         <Title className="footer-title" level={5} style={{ margin: 'auto' }}>
           React RSS 2023
         </Title>
-        <Link href="https://rs.school/react/">
+        <Link data-testid="link" target="blank" href="https://rs.school/react/">
           <img src={rsLogo} alt="rs-logo" style={{ width: 100 }} />
         </Link>
       </Flex>

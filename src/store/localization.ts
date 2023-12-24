@@ -44,7 +44,7 @@ export const localization: { ru: Localization; en: Localization } = {
       'Мы готовы помочь друг другу. Мы можем изучить как можно больше нового и собраться вместе, чтобы поделиться своими знаниями.',
     'welcome-page/team-title': 'Наша команда',
     'dev-names': ['Алексей Филиппович', 'Андрей Зецманис', 'Юлия Чекан'],
-    'nav-links': ['Приветствие', 'Главная', 'Войти', 'Регистрация'],
+    'nav-links': ['Приветствие', 'Главная', 'Войти', 'Регистрация', 'Выйти'],
   },
   en: {
     'buttonLabel': 'Submit query',
@@ -71,6 +71,6 @@ export const localization: { ru: Localization; en: Localization } = {
       'We are ready to help each other on demand. We can spread out to investigate as much as possible and get together to share our knowledge.',
     'welcome-page/team-title': 'Our team',
     'dev-names': ['Alexey Filipovich', 'Andrei Zetsmanis', 'Yuliya Chekan'],
-    'nav-links': ['Welcome', 'Main', 'SignIn', 'SignUp'],
+    'nav-links': ['Welcome', 'Main', 'SignIn', 'SignUp', 'SignOut'],
   },
 };
