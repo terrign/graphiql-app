@@ -1,10 +1,13 @@
 import { Button, Flex, Input, Tooltip } from 'antd';
 import Compact from 'antd/es/space/Compact';
 import { SyncOutlined } from '@ant-design/icons';
+import { usePrettify } from '../../utils/prettify';
 
 const EditorHeader = () => {
-  const prettyHandler = () => {};
+  const prettyHandler = usePrettify();
+
   const runHandler = () => {};
+
   return (
     <Flex gap={10}>
       <Button type="default" onClick={runHandler}>
