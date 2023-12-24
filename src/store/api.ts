@@ -40,7 +40,7 @@ export const api = createApi({
         return data;
       },
     }),
-    getData: query<Record<string, unknown>, RequestBody>({
+    getData: query<string, RequestBody>({
       query: ({ document, headers, variables }) => ({
         url: '/',
         method: 'POST',
@@ -52,6 +52,9 @@ export const api = createApi({
         },
         headers,
       }),
+      transformResponse: (data: Record<string, unknown>) => {
+        return JSON.stringify(data, null, 2);
+      },
     }),
   }),
 });
