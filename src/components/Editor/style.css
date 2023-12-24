@@ -1,0 +1,26 @@
+.editor {
+  height: calc(100% - 52px);
+  margin-top: 20px;
+  gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.editor__variables-container {
+  display: flex;
+  overflow: auto;
+  justify-content: flex-end;
+  position: absolute;
+  height: 40%;
+  width: 49%;
+  top: calc(60%);
+  padding-top: 52px;
+}
+
+.close-button {
+  position: absolute;
+  float: right;
+  top: 15px;
+  z-index: 100;
+}
