@@ -5,6 +5,7 @@ export interface EditorState {
   query: string;
   headers: string;
   variables: string;
+  queryCacheKey: string;
 }
 
 const initialState: EditorState = {
@@ -12,6 +13,7 @@ const initialState: EditorState = {
   query: '',
   headers: '',
   variables: '',
+  queryCacheKey: '',
 };
 
 export const editorSlice = createSlice({
@@ -30,10 +32,13 @@ export const editorSlice = createSlice({
     setUrl: (state, action) => {
       state.url = action.payload;
     },
+    setQueryCacheKey: (state, action) => {
+      state.queryCacheKey = action.payload;
+    },
   },
 });
 
-export const { setQuery, setHeaders, setVariables, setUrl } = editorSlice.actions;
+export const { setQuery, setHeaders, setVariables, setUrl, setQueryCacheKey } = editorSlice.actions;
 
 const editor = editorSlice.reducer;
 

@@ -52,11 +52,14 @@ export const api = createApi({
         },
         headers,
       }),
-      transformResponse: (data: Record<string, unknown>) => {
+      transformResponse: (data: Record<string, unknown>): string => {
         return JSON.stringify(data, null, 2);
+      },
+      transformErrorResponse: (error): string => {
+        return JSON.stringify(error.data, null, 2);
       },
     }),
   }),
 });
 
-export const { useLazyGetSchemaQuery, useLazyGetDataQuery } = api;
+export const { useLazyGetSchemaQuery, useLazyGetDataQuery, endpoints } = api;
