@@ -39,11 +39,11 @@ const GraphqlEditor = () => {
           </Button>
         </Compact>
         <div style={{ display: showVariables ? 'flex' : 'none' }} className="editor__variables-container">
-          <Button icon={<CloseOutlined />} className="close-button" onClick={closeHandler} />
+          <Button type="text" icon={<CloseOutlined />} className="close-button" onClick={closeHandler} />
           <VariablesEditor />
         </div>
         <div style={{ display: showHeaders ? 'flex' : 'none' }} className="editor__variables-container">
-          <Button icon={<CloseOutlined />} className="close-button" onClick={closeHandler} />
+          <Button type="text" icon={<CloseOutlined />} className="close-button" onClick={closeHandler} />
           <HeadersEditor />
         </div>
         <ResultView className="editor__result" />

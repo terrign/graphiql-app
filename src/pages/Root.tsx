@@ -7,7 +7,7 @@ import AppHeader from '../components/Header/AppHeader';
 
 const Root = () => {
   return (
-    <Layout style={{ minHeight: '100dvh' }}>
+    <Layout style={{ minHeight: '100dvh', height: 1 }}>
       <AppHeader />
       <Layout style={{ padding: 20 }}>
         <Outlet />
