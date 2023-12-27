@@ -1,7 +1,7 @@
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getIntrospectionQuery, IntrospectionQuery } from 'graphql';
-import { gql } from 'graphql-request';
+import { gql } from '../utils/gql';
 import { RootState } from './index';
 
 interface RequestBody {
