@@ -1,5 +1,9 @@
-export function prettify(query: string): string {
-  query = query
+import { useCallback } from 'react';
+import { setQuery } from '../store/editor.slice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+
+export function prettify(rawQuery: string): string {
+  const query = rawQuery
     .replace(/\s+/g, ' ')
     .replace(/(\s+)?\{(\s+)?/g, ' {\n')
     .replace(/(\s+)?\}(\s+)?/g, '}\n')
@@ -40,3 +44,15 @@ export function prettify(query: string): string {
   const formattedQuery = formattedLines.join('\n');
   return formattedQuery;
 }
+
+export const usePrettify = () => {
+  const rawQuery = useAppSelector((state) => state.editor.query);
+  const dispatch = useAppDispatch();
+
+  const prettifyHandler = useCallback(() => {
+    const query = prettify(rawQuery);
+    dispatch(setQuery(query));
+  }, [rawQuery]);
+
+  return prettifyHandler;
+};
