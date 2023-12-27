@@ -15,7 +15,7 @@ const EditorHeader = () => {
   const url = useAppSelector((state) => state.editor.url);
   const [fetch] = useLazyGetDataQuery();
 
-  const handcleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setUrl(event.target.value));
   };
 
@@ -57,7 +57,7 @@ const EditorHeader = () => {
         Prettify
       </Button>
       <Compact style={{ width: '100%' }}>
-        <Input value={url} onChange={handcleChange} placeholder="https://graphql-endpoint.com" />
+        <Input value={url} onChange={handleChange} placeholder="https://graphql-endpoint.com" />
         <Tooltip placement="topLeft" title="Re-fetch schema">
           <Button type="default" icon={<SyncOutlined />} />
         </Tooltip>
