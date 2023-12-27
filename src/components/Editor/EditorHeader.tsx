@@ -4,7 +4,7 @@ import { SyncOutlined } from '@ant-design/icons';
 import { usePrettify } from '../../utils/prettify';
 import { useLazyGetDataQuery } from '../../store/api';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { setUrl, setQueryCacheKey } from '../../store/editor.slice';
+import { setUrl, setQueryCacheKey, setResponse } from '../../store/editor.slice';
 
 const EditorHeader = () => {
   const prettyHandler = usePrettify();
@@ -20,13 +20,32 @@ const EditorHeader = () => {
   };
 
   const runHandler = () => {
-    const { queryCacheKey } = fetch({
-      document: query,
-      variables: JSON.parse(variables),
-      headers: JSON.parse(headers),
-    });
+    try {
+      const { queryCacheKey } = fetch({
+        document: query,
+        variables: variables.trim() ? JSON.parse(variables) : {},
+        headers: headers.trim() ? JSON.parse(headers) : {},
+      });
 
-    dispatch(setQueryCacheKey(queryCacheKey));
+      dispatch(setResponse(''));
+      dispatch(setQueryCacheKey(queryCacheKey));
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(
+          setResponse(
+            JSON.stringify(
+              {
+                error: {
+                  message: error.message,
+                },
+              },
+              null,
+              2,
+            ),
+          ),
+        );
+      }
+    }
   };
 
   return (
