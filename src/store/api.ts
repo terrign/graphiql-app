@@ -49,10 +49,12 @@ export const api = createApi({
         },
         headers,
       }),
-      transformResponse: (data: Record<string, unknown>): string => {
+      transformResponse: (data: Record<string, unknown>) => {
         return JSON.stringify(data, null, 2);
       },
-      transformErrorResponse: (error): string => {
+      transformErrorResponse: (error) => {
+        if (!error.data) return null;
+
         return JSON.stringify(error.data, null, 2);
       },
     }),
