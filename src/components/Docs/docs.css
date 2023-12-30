@@ -1,0 +1,30 @@
+.docs-invisible {
+  width: 320px;
+  position: absolute;
+  right: -320px;
+  z-index: 5;
+  top: 140px;
+  height: calc(100dvh - 290px);
+  background-color: rgb(255, 255, 255);
+  border-left: 10px solid rgb(239 239 239);
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  padding: 15px 15px;
+}
+
+.docs-visible {
+  width: 320px;
+  position: absolute;
+  right: 0;
+  top: 140px;
+  z-index: 5;
+  height: calc(100dvh - 290px);
+  background-color: rgb(255, 255, 255);
+  border-left: 10px solid rgb(239 239 239);
+  box-shadow: -15px 0 15px rgba(224, 224, 224, 0.318);
+  box-sizing: border-box;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  padding: 15px 15px;
+  overflow-y: auto;
+}

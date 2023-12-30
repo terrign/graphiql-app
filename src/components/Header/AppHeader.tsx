@@ -25,7 +25,7 @@ const AppHeader = () => {
     } else if (!user && !loading) {
       setMenuItems(createMenuItems(false, localization.t['nav-links']));
     }
-  }, [user, localization.lang]);
+  }, [user, loading, localization.lang]);
   useEffect(() => {
     const handleScroll = () => (window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false));
     window.onscroll = handleScroll;
