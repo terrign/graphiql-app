@@ -5,11 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { FloatButton, Layout } from 'antd';
 import GraphqlEditor from '../components/Editor';
 import Docs from '../components/Docs/Docs';
+import { useLazyGetSchemaQuery } from '../store/api';
 
 const Main = () => {
   const [user] = useIdToken(auth);
   const nav = useNavigate();
   const [docsVisibility, setDocsVisibility] = useState(false);
+  const [trigger, result] = useLazyGetSchemaQuery();
+  const { data, error, isError, isLoading, isFetching } = result;
+
+  useEffect(() => {
+    trigger();
+  }, [isLoading]);
 
   useEffect(() => {
     if (!user) {
