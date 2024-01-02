@@ -15,7 +15,7 @@ const ResultView = ({ className }: { className: string }) => {
     return (
       <div
         style={{
-          width: '50%',
+          width: ' calc(50% - 10px)',
           backgroundColor: '#2e3235',
           display: 'flex',
           justifyContent: 'center',
@@ -30,7 +30,7 @@ const ResultView = ({ className }: { className: string }) => {
     return (
       <NoData
         style={{
-          width: '50%',
+          width: ' calc(50% - 10px)',
           backgroundColor: '#2e3235',
           display: 'flex',
           justifyContent: 'center',
