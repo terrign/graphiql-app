@@ -2,9 +2,24 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { api } from './api';
 import editor from './editor.slice';
 
+interface Action {
+  type: string;
+  payload?: unknown;
+}
+
 const reducer = combineReducers({
   editor,
   [api.reducerPath]: api.reducer,
+  isLoading: (state = false, action: Action) => {
+    switch (action.type) {
+      case 'START_LOADING':
+        return true;
+      case 'STOP_LOADING':
+        return false;
+      default:
+        return state;
+    }
+  },
 });
 
 const store = configureStore({
