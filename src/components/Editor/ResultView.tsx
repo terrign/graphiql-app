@@ -22,7 +22,7 @@ const ResultView = ({ className }: { className: string }) => {
           alignItems: 'center',
         }}
       >
-        <Hourglass />;
+        <Hourglass />
       </div>
     );
   }
