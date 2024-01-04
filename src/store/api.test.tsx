@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { test } from 'vitest';
 import { render, act } from '@testing-library/react';
 import type { RenderOptions } from '@testing-library/react';
@@ -63,5 +63,5 @@ test('useLazyGetDataQuery', () => {
   const runHandler = getByTestId('runHandler');
   act(() => runHandler.click());
 
-  console.log(store.getState().api.queries[store.getState().editor.queryCacheKey]);
+  //console.log(store.getState().api.queries[store.getState().editor.queryCacheKey]);
 });
