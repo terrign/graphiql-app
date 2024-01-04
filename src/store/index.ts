@@ -22,6 +22,14 @@ const reducer = combineReducers({
   },
 });
 
+export const setupStore = (preloadedState?: Partial<RootState>) => {
+  return configureStore({
+    reducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
+    preloadedState,
+  });
+};
+
 const store = configureStore({
   reducer,
   devTools: true,
