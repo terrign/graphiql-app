@@ -3,9 +3,25 @@ interface Error {
   description: string;
 }
 
+interface FormLoc {
+  submitButton: string;
+  tailAsk: string;
+  tailLinkText: string;
+}
+
+interface FormValidationLoc {
+  emailInvalid: string;
+  emailRequired: string;
+  passRequired: string;
+  passWeak: string;
+  passSpaces: string;
+  passConfirmRequired: string;
+  passConfirmMatch: string;
+}
+
 export type ErrorCode = 'auth/too-many-requests' | 'auth/invalid-credential' | 'auth/email-already-in-use';
 interface Localization {
-  buttonLabel: string;
+  'buttonLabel': string;
   ['auth/too-many-requests']: Error;
   ['auth/invalid-credential']: Error;
   ['auth/email-already-in-use']: Error;
@@ -16,6 +32,12 @@ interface Localization {
   ['welcome-page/team-title']: string;
   ['dev-names']: string[];
   ['nav-links']: string[];
+  'form/emailLabel': string;
+  'form/passwordLabel': string;
+  'form/confirmPasswordLabel': string;
+  'signUp': FormLoc;
+  'signIn': FormLoc;
+  'form/validation': FormValidationLoc;
 }
 
 export const localization: { ru: Localization; en: Localization } = {
@@ -45,6 +67,28 @@ export const localization: { ru: Localization; en: Localization } = {
     'welcome-page/team-title': 'Наша команда',
     'dev-names': ['Алексей Филиппович', 'Андрей Зецманис', 'Юлия Чекан'],
     'nav-links': ['Приветствие', 'Главная', 'Войти', 'Регистрация', 'Выйти'],
+    'form/emailLabel': 'Eмеил',
+    'form/passwordLabel': 'Пароль',
+    'form/confirmPasswordLabel': 'Повторите пароль',
+    'signUp': {
+      submitButton: 'Регистрация',
+      tailAsk: 'Есть аккаунт?',
+      tailLinkText: 'Войти',
+    },
+    'signIn': {
+      submitButton: 'Войти',
+      tailAsk: `Еще нет аккаунта?`,
+      tailLinkText: 'Регистрация',
+    },
+    'form/validation': {
+      emailInvalid: 'Неверный емеил',
+      emailRequired: 'Пожалуйста, введите емеил',
+      passRequired: 'Пожалуйста, введите пароль',
+      passWeak: 'Пароль должен содержать минимум 8 символов, минимум 1 заглавную букву, 1 строчную букву и 1 цифру',
+      passSpaces: 'Пароль не должны содержать пробелы в начале или в конце.',
+      passConfirmRequired: 'Пожалуйста, подтвердите пароль',
+      passConfirmMatch: `Пароли не совпадают`,
+    },
   },
   en: {
     'buttonLabel': 'Submit query',
@@ -72,5 +116,28 @@ export const localization: { ru: Localization; en: Localization } = {
     'welcome-page/team-title': 'Our team',
     'dev-names': ['Alexey Filipovich', 'Andrei Zetsmanis', 'Yuliya Chekan'],
     'nav-links': ['Welcome', 'Main', 'SignIn', 'SignUp', 'SignOut'],
+    'form/emailLabel': 'E-mail',
+    'form/passwordLabel': 'Password',
+    'form/confirmPasswordLabel': 'Confirm password',
+    'signUp': {
+      submitButton: 'Sign Up',
+      tailAsk: 'Already have an account?',
+      tailLinkText: 'Sign In',
+    },
+    'signIn': {
+      submitButton: 'Sign In',
+      tailAsk: `Don't have an account yet?`,
+      tailLinkText: 'Sign Up',
+    },
+    'form/validation': {
+      emailInvalid: 'Please enter valid E-mail',
+      emailRequired: 'Please enter your E-mail',
+      passRequired: 'Please enter your password',
+      passWeak:
+        'Password must contain minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number',
+      passSpaces: 'Passwords should not contain leading or trailing whitespace',
+      passConfirmRequired: 'Please confirm your password',
+      passConfirmMatch: `Passwords don't match`,
+    },
   },
 };
