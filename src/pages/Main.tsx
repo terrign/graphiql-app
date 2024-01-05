@@ -6,16 +6,24 @@ import { FloatButton, Layout } from 'antd';
 import GraphqlEditor from '../components/Editor';
 import Docs from '../components/Docs/Docs';
 import { useLazyGetSchemaQuery } from '../store/api';
+// import { Schema } from '../components/Docs/types';
+import { IntrospectionSchema } from 'graphql';
 
 const Main = () => {
   const [user] = useIdToken(auth);
   const nav = useNavigate();
   const [docsVisibility, setDocsVisibility] = useState(false);
+  const [schema, setSchema] = useState<IntrospectionSchema | null>(null);
   const [trigger, result] = useLazyGetSchemaQuery();
   const { data, error, isError, isLoading, isFetching } = result;
 
   useEffect(() => {
     trigger();
+    const scheme = data?.__schema;
+    if (!isLoading && scheme) {
+      setSchema(scheme);
+    }
+    console.log(scheme);
   }, [isLoading]);
 
   useEffect(() => {
@@ -32,7 +40,7 @@ const Main = () => {
           setDocsVisibility(!docsVisibility);
         }}
       />
-      <Docs visibility={docsVisibility} />
+      {!isLoading && <Docs schema={schema} visibility={docsVisibility} />}
     </Layout>
   );
 };
