@@ -8,7 +8,7 @@ interface NoDataProps {
 
 export const NoData = ({ style, className }: NoDataProps) => {
   return (
-    <div style={style} className={className}>
+    <div style={style} className={className} data-testid="noData">
       <Empty />
     </div>
   );

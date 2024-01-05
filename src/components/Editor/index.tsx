@@ -9,7 +9,7 @@ import Compact from 'antd/es/space/Compact';
 import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 
-const GraphqlEditor = () => {
+export const GraphqlEditor = () => {
   const [showHeaders, setShowHeaders] = useState<boolean>(false);
   const [showVariables, setShowVariables] = useState<boolean>(false);
   const showHeadersHandler = () => {

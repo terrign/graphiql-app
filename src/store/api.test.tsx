@@ -1,6 +1,6 @@
 import React from 'react';
 import { test } from 'vitest';
-import { render, act } from '@testing-library/react';
+import { render, act, waitFor } from '@testing-library/react';
 import type { RenderOptions } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { setupStore } from '.';
@@ -8,8 +8,6 @@ import type { AppStore, RootState } from '.';
 import EditorHeader from '../components/Editor/EditorHeader';
 import nock from 'nock';
 
-// This type interface extends the default options for render from RTL, as well
-// as allows the user to specify other things such as initialState, store.
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<RootState>;
   store?: AppStore;
@@ -19,7 +17,7 @@ export function renderWithProviders(
   ui: React.ReactElement,
   {
     preloadedState = {},
-    // Automatically create a store instance if no store was passed in
+
     store = setupStore(preloadedState),
     ...renderOptions
   }: ExtendedRenderOptions = {},
@@ -30,7 +28,7 @@ export function renderWithProviders(
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }
 
-test('useLazyGetDataQuery', () => {
+test('useLazyGetDataQuery', async () => {
   nock('https://rickandmortyapi.com')
     .post(
       '/graphql',
@@ -63,5 +61,36 @@ test('useLazyGetDataQuery', () => {
   const runHandler = getByTestId('runHandler');
   act(() => runHandler.click());
 
-  //console.log(store.getState().api.queries[store.getState().editor.queryCacheKey]);
+  await waitFor(() => {
+    const apiQuery = store.getState().api.queries[store.getState().editor.queryCacheKey];
+    expect(apiQuery).toBeDefined();
+    if (apiQuery) {
+      expect(apiQuery.status).not.toEqual('pending');
+    }
+  });
+
+  const state = store.getState();
+  let apiResponse = state.api.queries[state.editor.queryCacheKey];
+
+  const expectedResponse = {
+    data: {
+      character: {
+        name: 'Rick Sanchez',
+      },
+    },
+  };
+
+  await waitFor(() => {
+    if (apiResponse && typeof apiResponse.data === 'string') {
+      expect(apiResponse.data).toBeDefined();
+    }
+  });
+
+  apiResponse = state.api.queries[state.editor.queryCacheKey];
+
+  if (apiResponse && typeof apiResponse.data === 'string') {
+    const apiResponseData = JSON.parse(apiResponse.data);
+
+    expect(apiResponseData).toEqual(expectedResponse);
+  }
 });
