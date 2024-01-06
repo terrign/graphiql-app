@@ -54,6 +54,11 @@ interface Localization {
   'form/validation': FormValidationLoc;
   'urlError': UrlErrorLoc;
   'docs': DocsLoc;
+  'noData': string;
+  'runButton': string;
+  'prettifyButton': string;
+  'variables': string;
+  'headers': string;
 }
 
 export const localization: { ru: Localization; en: Localization } = {
@@ -77,9 +82,8 @@ export const localization: { ru: Localization; en: Localization } = {
     'welcome-page/paragraph1':
       'Это итоговое задание курса React Rs School. GraphiQL — это интерфейсное приложение для GraphQL, которое позволяет разработчикам запрашивать данные со своего внутреннего сервера и манипулировать ими через интуитивно понятный пользовательский интерфейс.',
     'welcome-page/paragraph2':
-      'Мы ищем новые технологии и готовы использовать их на ходу в наших проектах. Мы использовали разделение рабочей нагрузки по задачам вместо разделения по областям, поэтому каждый внес свой доход в каждую функцию в этом проекте.',
-    'welcome-page/paragraph3':
-      'Мы готовы помочь друг другу. Мы можем изучить как можно больше нового и собраться вместе, чтобы поделиться своими знаниями.',
+      'Мы ищем новые технологии и готовы использовать их на ходу в наших проектах. Мы использовали разделение рабочей нагрузки по задачам вместо разделения по областям, поэтому каждый внес свой вклад.',
+    'welcome-page/paragraph3': 'Мы готовы помочь друг другу. Мы всегда готовы изучать новое и делиться друг с другом!',
     'welcome-page/team-title': 'Наша команда',
     'dev-names': ['Алексей Филиппович', 'Андрей Зецманис', 'Юлия Чекан'],
     'nav-links': ['Приветствие', 'Главная', 'Войти', 'Регистрация', 'Выйти'],
@@ -117,6 +121,11 @@ export const localization: { ru: Localization; en: Localization } = {
       rootTypes: 'Корневые типы',
       schemaTypes: 'все типы схемы',
     },
+    'noData': 'Нет данных',
+    'runButton': 'Пуск',
+    'prettifyButton': 'Выровнять',
+    'variables': 'Переменные',
+    'headers': 'Заголовки',
   },
   en: {
     'buttonLabel': 'Submit query',
@@ -179,5 +188,10 @@ export const localization: { ru: Localization; en: Localization } = {
       rootTypes: 'Root types',
       schemaTypes: 'All schema types',
     },
+    'noData': 'No data',
+    'runButton': 'Run',
+    'prettifyButton': 'Prettify',
+    'variables': 'Variables',
+    'headers': 'Headers',
   },
 };
