@@ -3,7 +3,7 @@ import { useLocalization } from '../../store/localization.context';
 import { VALID_PASSWORD_MATCHER } from './constants';
 import { useMemo } from 'react';
 
-const useAuthFormValidationRules = (): Record<'emailRules' | 'passRules' | 'passConfirmRules', Rule[]> => {
+export const useAuthFormValidationRules = (): Record<'emailRules' | 'passRules' | 'passConfirmRules', Rule[]> => {
   const loc = useLocalization().t;
   const key = 'form/validation';
   const emailRules: Rule[] = useMemo(

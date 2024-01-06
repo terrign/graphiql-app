@@ -7,6 +7,7 @@ import { setupStore } from '.';
 import type { AppStore, RootState } from '.';
 import EditorHeader from '../components/Editor/EditorHeader';
 import nock from 'nock';
+import { getIntrospectionQuery } from 'graphql';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<RootState>;
@@ -76,6 +77,66 @@ test('useLazyGetDataQuery', async () => {
     data: {
       character: {
         name: 'Rick Sanchez',
+      },
+    },
+  };
+
+  await waitFor(() => {
+    if (apiResponse && typeof apiResponse.data === 'string') {
+      expect(apiResponse.data).toBeDefined();
+    }
+  });
+
+  apiResponse = state.api.queries[state.editor.queryCacheKey];
+
+  if (apiResponse && typeof apiResponse.data === 'string') {
+    const apiResponseData = JSON.parse(apiResponse.data);
+
+    expect(apiResponseData).toEqual(expectedResponse);
+  }
+});
+test('useLazyGetSchemaQuery', async () => {
+  nock('https://rickandmortyapi.com')
+    .post('/graphql', JSON.stringify({ query: getIntrospectionQuery() }))
+    .reply(200, {
+      data: {
+        __schema: {
+          types: [],
+        },
+      },
+    });
+
+  const { getByTestId, store } = renderWithProviders(<EditorHeader />, {
+    preloadedState: {
+      editor: {
+        url: 'https://rickandmortyapi.com/graphql',
+        headers: '',
+        query: '',
+        queryCacheKey: '',
+        response: '',
+        variables: '',
+      },
+    },
+  });
+
+  const runHandler = getByTestId('runHandler');
+  act(() => runHandler.click());
+
+  await waitFor(() => {
+    const apiQuery = store.getState().api.queries[store.getState().editor.queryCacheKey];
+    expect(apiQuery).toBeDefined();
+    if (apiQuery) {
+      expect(apiQuery.status).not.toEqual('pending');
+    }
+  });
+
+  const state = store.getState();
+  let apiResponse = state.api.queries[state.editor.queryCacheKey];
+
+  const expectedResponse = {
+    data: {
+      __schema: {
+        types: [],
       },
     },
   };

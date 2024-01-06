@@ -26,7 +26,7 @@ export const GraphqlEditor = () => {
     setShowVariables(false);
   };
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div data-testid="graphqlEditor" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <EditorHeader />
       <div className="editor">
         <QueryEditor className="editor__query" />
