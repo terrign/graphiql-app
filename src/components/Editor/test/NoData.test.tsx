@@ -7,6 +7,7 @@ import { setupStore } from '../../../store/index';
 import type { AppStore, RootState } from '../../../store/index';
 import nock from 'nock';
 import ResultView from '../ResultView';
+import { LocalizationProvider } from '../../../store/localization.context';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<RootState>;
@@ -23,7 +24,11 @@ export function renderWithProviders(
   }: ExtendedRenderOptions = {},
 ) {
   function Wrapper({ children }: { children: React.ReactElement }): JSX.Element {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <LocalizationProvider>
+        <Provider store={store}>{children}</Provider>
+      </LocalizationProvider>
+    );
   }
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }

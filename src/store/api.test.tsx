@@ -8,6 +8,7 @@ import type { AppStore, RootState } from '.';
 import EditorHeader from '../components/Editor/EditorHeader';
 import nock from 'nock';
 import { getIntrospectionQuery } from 'graphql';
+import { LocalizationProvider } from './localization.context';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<RootState>;
@@ -24,7 +25,11 @@ export function renderWithProviders(
   }: ExtendedRenderOptions = {},
 ) {
   function Wrapper({ children }: { children: React.ReactElement }): JSX.Element {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <LocalizationProvider>
+        <Provider store={store}>{children}</Provider>
+      </LocalizationProvider>
+    );
   }
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }
