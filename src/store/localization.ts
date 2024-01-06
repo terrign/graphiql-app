@@ -9,6 +9,11 @@ interface FormLoc {
   tailLinkText: string;
 }
 
+interface UrlErrorLoc {
+  message: string;
+  description: string;
+}
+
 interface FormValidationLoc {
   emailInvalid: string;
   emailRequired: string;
@@ -17,6 +22,15 @@ interface FormValidationLoc {
   passSpaces: string;
   passConfirmRequired: string;
   passConfirmMatch: string;
+}
+
+interface DocsLoc {
+  rootDesc: string;
+  rootHeader: string;
+  noDescription: string;
+  fields: string;
+  rootTypes: string;
+  schemaTypes: string;
 }
 
 export type ErrorCode = 'auth/too-many-requests' | 'auth/invalid-credential' | 'auth/email-already-in-use';
@@ -38,6 +52,8 @@ interface Localization {
   'signUp': FormLoc;
   'signIn': FormLoc;
   'form/validation': FormValidationLoc;
+  'urlError': UrlErrorLoc;
+  'docs': DocsLoc;
 }
 
 export const localization: { ru: Localization; en: Localization } = {
@@ -89,6 +105,18 @@ export const localization: { ru: Localization; en: Localization } = {
       passConfirmRequired: 'Пожалуйста, подтвердите пароль',
       passConfirmMatch: `Пароли не совпадают`,
     },
+    'urlError': {
+      message: 'Неправильный url',
+      description: 'Произошла ошибка. Проверьте url',
+    },
+    'docs': {
+      rootDesc: 'Схема GraphQL предоставляет корневой тип для каждого типа операций.',
+      rootHeader: 'Документация',
+      noDescription: 'Нет описания',
+      fields: 'поля',
+      rootTypes: 'Корневые типы',
+      schemaTypes: 'все типы схемы',
+    },
   },
   en: {
     'buttonLabel': 'Submit query',
@@ -138,6 +166,18 @@ export const localization: { ru: Localization; en: Localization } = {
       passSpaces: 'Passwords should not contain leading or trailing whitespace',
       passConfirmRequired: 'Please confirm your password',
       passConfirmMatch: `Passwords don't match`,
+    },
+    'urlError': {
+      message: 'Wrong url',
+      description: 'Error occured. Check url',
+    },
+    'docs': {
+      rootDesc: 'A GraphQL schema provides a root type for each kind of operation.',
+      rootHeader: 'Documentation Explorer',
+      noDescription: 'No description',
+      fields: 'fields',
+      rootTypes: 'Root types',
+      schemaTypes: 'All schema types',
     },
   },
 };

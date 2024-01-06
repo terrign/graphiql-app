@@ -37,9 +37,9 @@ export const api = createApi({
   reducerPath: 'api',
   baseQuery: dynamicBaseQuery,
   endpoints: ({ query }) => ({
-    getSchema: query<IntrospectionQuery, void>({
-      query: () => ({
-        url: '/',
+    getSchema: query({
+      query: ({ url }) => ({
+        url,
         method: 'POST',
         body: {
           query: getIntrospectionQuery(),
@@ -71,4 +71,6 @@ export const api = createApi({
   }),
 });
 
+
 export const { useLazyGetSchemaQuery, useLazyGetDataQuery, endpoints, useGetDataQuery } = api;
+
