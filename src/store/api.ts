@@ -71,6 +71,4 @@ export const api = createApi({
   }),
 });
 
-
-export const { useLazyGetSchemaQuery, useLazyGetDataQuery, endpoints, useGetDataQuery } = api;
-
+export const { useLazyGetSchemaQuery, useLazyGetDataQuery, endpoints, useGetDataQuery, useGetSchemaQuery } = api;
