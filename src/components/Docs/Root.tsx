@@ -18,7 +18,7 @@ const Root = ({
       <Title level={5}>{localization.t.docs.rootTypes}</Title>
       {rootFields.map((field, ind) => {
         return (
-          <div key={`root-type${ind}`}>
+          <div key={`root-type${ind}`} data-testid="root-elem">
             <Link onClick={() => handleClickRoot(rootFields[ind])}>
               {field.name.toLowerCase()} :{field.name}
             </Link>
