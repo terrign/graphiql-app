@@ -8,8 +8,10 @@ import './style.css';
 import Compact from 'antd/es/space/Compact';
 import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
+import { useLocalization } from '../../store/localization.context';
 
 export const GraphqlEditor = () => {
+  const { t } = useLocalization();
   const [showHeaders, setShowHeaders] = useState<boolean>(false);
   const [showVariables, setShowVariables] = useState<boolean>(false);
   const showHeadersHandler = () => {
@@ -32,10 +34,10 @@ export const GraphqlEditor = () => {
         <QueryEditor className="editor__query" />
         <Compact style={{ position: 'absolute', top: 'calc(100% - 37px)', zIndex: 0 }}>
           <Button type="link" onClick={showVariablesHandler}>
-            Variables
+            {t.variables}
           </Button>
           <Button type="link" onClick={showHeadersHandler}>
-            Headers
+            {t.headers}
           </Button>
         </Compact>
         <div style={{ display: showVariables ? 'flex' : 'none' }} className="editor__variables-container">

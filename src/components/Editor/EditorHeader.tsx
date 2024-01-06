@@ -6,10 +6,12 @@ import { useLazyGetDataQuery } from '../../store/api';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { setUrl, setQueryCacheKey, setResponse } from '../../store/editor.slice';
 import { useState } from 'react';
+import { useLocalization } from '../../store/localization.context';
 
 const EditorHeader = () => {
   const prettyHandler = usePrettify();
   const dispatch = useAppDispatch();
+  const { t } = useLocalization();
   const query = useAppSelector((state) => state.editor.query);
   const variables = useAppSelector((state) => state.editor.variables);
   const headers = useAppSelector((state) => state.editor.headers);
@@ -56,10 +58,10 @@ const EditorHeader = () => {
   return (
     <Flex gap={10}>
       <Button type="default" onClick={runHandler} data-testid="runHandler">
-        Run
+        {t.runButton}
       </Button>
       <Button type="default" onClick={prettyHandler}>
-        Prettify
+        {t.prettifyButton}
       </Button>
       <Compact style={{ width: '100%' }}>
         <Input value={endpoint} onChange={handleChange} placeholder="https://graphql-endpoint.com" />
