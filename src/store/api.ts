@@ -20,6 +20,16 @@ const dynamicBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
 ) => {
   const url = (api.getState() as RootState).editor.url;
 
+  api.dispatch({ type: 'START_LOADING' });
+  try {
+    const result = await rawBaseQuery({ ...(args as FetchArgs), url }, api, extraOptions);
+    api.dispatch({ type: 'STOP_LOADING' });
+    return result;
+  } catch (error) {
+    api.dispatch({ type: 'STOP_LOADING' });
+    throw error;
+  }
+
   return rawBaseQuery({ ...(args as FetchArgs), url }, api, extraOptions);
 };
 
@@ -49,14 +59,18 @@ export const api = createApi({
         },
         headers,
       }),
-      transformResponse: (data: Record<string, unknown>): string => {
+      transformResponse: (data: Record<string, unknown>) => {
         return JSON.stringify(data, null, 2);
       },
-      transformErrorResponse: (error): string => {
+      transformErrorResponse: (error) => {
+        if (!error.data) return null;
+
         return JSON.stringify(error.data, null, 2);
       },
     }),
   }),
 });
 
-export const { useGetSchemaQuery, useLazyGetDataQuery, endpoints } = api;
+
+export const { useLazyGetSchemaQuery, useLazyGetDataQuery, endpoints, useGetDataQuery } = api;
+

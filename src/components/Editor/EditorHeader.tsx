@@ -64,7 +64,9 @@ const EditorHeader = () => {
       <Compact style={{ width: '100%' }}>
         <Input value={endpoint} onChange={handleChange} placeholder="https://graphql-endpoint.com" />
         <Tooltip placement="topLeft" title="Re-fetch schema">
-          <Button type="default" onClick={refetchSchema} icon={<SyncOutlined />} />
+
+          <Button data-testid="runHandler" type="default" onClick={runHandler} icon={<SyncOutlined />} />
+
         </Tooltip>
       </Compact>
     </Flex>
