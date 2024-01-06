@@ -55,7 +55,7 @@ const EditorHeader = () => {
 
   return (
     <Flex gap={10}>
-      <Button type="default" onClick={runHandler}>
+      <Button type="default" onClick={runHandler} data-testid="runHandler">
         Run
       </Button>
       <Button type="default" onClick={prettyHandler}>
@@ -64,7 +64,7 @@ const EditorHeader = () => {
       <Compact style={{ width: '100%' }}>
         <Input value={endpoint} onChange={handleChange} placeholder="https://graphql-endpoint.com" />
         <Tooltip placement="topLeft" title="Re-fetch schema">
-          <Button data-testid="runHandler" type="default" onClick={refetchSchema} icon={<SyncOutlined />} />
+          <Button type="default" onClick={refetchSchema} icon={<SyncOutlined />} />
         </Tooltip>
       </Compact>
     </Flex>
