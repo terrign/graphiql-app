@@ -26,6 +26,7 @@ const Main = () => {
       setSchema(data.__schema);
     }
     if (isError) {
+      setDocsVisibility(false);
       notification.error({
         message: localization.t.urlError.message,
         description: localization.t.urlError.description,
