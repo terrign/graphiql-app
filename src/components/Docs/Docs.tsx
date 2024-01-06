@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import DocsHeader from './DocsHeader';
 import Root from './Root';
 import Fields from './Fields';
+import { Type } from './types';
+import InputFields from './InputFields';
 
 export interface RootObject {
   name: string;
@@ -30,22 +32,17 @@ const Docs = ({ visibility, schema }: { visibility: boolean; schema: Introspecti
       );
       const rootFields = schema.types.filter((type) => rootTypes.includes(type.name));
       const schemaStack = schema.types.filter((type) => !rootTypes.includes(type.name) && !type.name.startsWith('__'));
-      // console.log(rootTypes);
       const rootObj = {
         name: 'RootDocs',
         description: 'Docs',
         rootFields: [...rootFields],
         schemaFields: [...schemaStack],
       };
-      // console.log(rootObj);
       setStack([rootObj]);
-      console.log(stack);
     } else {
       setStack([]);
     }
   }, [schema]);
-
-  console.log(stack);
 
   useEffect(() => {
     if (stack.length > 1) {
@@ -109,7 +106,6 @@ const Docs = ({ visibility, schema }: { visibility: boolean; schema: Introspecti
     }
   };
 
-  // console.log(stack);
   return (
     <div className={visibility ? 'docs-visible' : 'docs-invisible'}>
       <DocsHeader showBtnBack={showBtnBack} valueBtnBack={valueBtnBack} handleClickBack={handleClickBack} />
@@ -119,23 +115,9 @@ const Docs = ({ visibility, schema }: { visibility: boolean; schema: Introspecti
       {stack.length > 1 && (
         <Fields stack={stack} handleSearchTypes={handleSearchTypes} handleClickKey={handleClickKey} />
       )}
-      {/* {schema?.types
-        .filter((val) => !val.name.startsWith('__'))
-        .map((val, ind) => {
-          if (val.name === 'Query') {
-            return (
-              <div key={`root-type${ind}`}>
-                <Title level={5}>root type</Title>
-                <Link>query :{val.name}</Link>
-              </div>
-            );
-          }
-          return (
-            <div key={`schema-types${ind}`}>
-              <Link>{val.name}</Link>
-            </div>
-          );
-        })} */}
+      {stack.length > 1 && String((stack[stack.length - 1] as unknown as Type).kind) === 'INPUT_OBJECT' && (
+        <InputFields stack={stack} handleSearchTypes={handleSearchTypes} handleClickKey={handleClickKey} />
+      )}
     </div>
   );
 };

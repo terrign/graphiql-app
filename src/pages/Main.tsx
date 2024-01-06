@@ -1,30 +1,28 @@
 import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from '../auth';
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FloatButton, Layout } from 'antd';
+import { FloatButton, Layout, Spin } from 'antd';
 import GraphqlEditor from '../components/Editor';
-import Docs from '../components/Docs/Docs';
-import { useLazyGetSchemaQuery } from '../store/api';
-// import { Schema } from '../components/Docs/types';
+import { useGetSchemaQuery } from '../store/api';
 import { IntrospectionSchema } from 'graphql';
+import { useAppSelector } from '../store/hooks';
+
+const LazyDocs = lazy(() => import('../components/Docs/Docs'));
 
 const Main = () => {
   const [user] = useIdToken(auth);
   const nav = useNavigate();
   const [docsVisibility, setDocsVisibility] = useState(false);
   const [schema, setSchema] = useState<IntrospectionSchema | null>(null);
-  const [trigger, result] = useLazyGetSchemaQuery();
-  const { data, error, isError, isLoading, isFetching } = result;
+  const url = useAppSelector((state) => state.editor.url);
+  const { data, isLoading, isFetching } = useGetSchemaQuery({ url });
 
   useEffect(() => {
-    trigger();
-    const scheme = data?.__schema;
-    if (!isLoading && scheme) {
-      setSchema(scheme);
+    if (!isFetching && data?.__schema) {
+      setSchema(data.__schema);
     }
-    console.log(scheme);
-  }, [isLoading]);
+  }, [isFetching, url, data]);
 
   useEffect(() => {
     if (!user) {
@@ -34,13 +32,18 @@ const Main = () => {
   return (
     <Layout style={{ marginTop: 64, height: '100%' }}>
       <GraphqlEditor />
-      <FloatButton
-        style={{ bottom: 100 }}
-        onClick={() => {
-          setDocsVisibility(!docsVisibility);
-        }}
-      />
-      {!isLoading && <Docs schema={schema} visibility={docsVisibility} />}
+      {!isFetching && (
+        <FloatButton
+          style={{ bottom: 100 }}
+          onClick={() => {
+            setDocsVisibility(!docsVisibility);
+          }}
+        />
+      )}
+
+      <Suspense fallback={<Spin size="large" />}>
+        {!isLoading && <LazyDocs schema={schema} visibility={docsVisibility} />}
+      </Suspense>
     </Layout>
   );
 };

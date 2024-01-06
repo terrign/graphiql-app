@@ -11,12 +11,12 @@ const Arguments = ({
   handleClickArgument: (value: string | null) => void;
 }) => {
   return (
-    <div>
+    <>
       {(field as IntrospectionField).args.map((arg, ind) => {
         return (
-          <div key={ind}>
-            <span dangerouslySetInnerHTML={{ __html: ind === 0 ? '(' : '&nbsp;' }} />
-            <span>{`${arg.name}: `}</span>
+          <div key={ind} style={{ display: 'flex' }}>
+            <>{ind === 0 ? '(' : ' '}</>
+            <>{`${arg.name}: `}</>
             <Link onClick={() => handleClickArgument(findNameType('key', arg.type as unknown as Type))}>
               {findNameType('value', arg.type as unknown as Type)}
             </Link>
@@ -24,7 +24,7 @@ const Arguments = ({
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 

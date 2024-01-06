@@ -5,6 +5,7 @@ import { usePrettify } from '../../utils/prettify';
 import { useLazyGetDataQuery } from '../../store/api';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { setUrl, setQueryCacheKey, setResponse } from '../../store/editor.slice';
+import { useState } from 'react';
 
 const EditorHeader = () => {
   const prettyHandler = usePrettify();
@@ -13,10 +14,11 @@ const EditorHeader = () => {
   const variables = useAppSelector((state) => state.editor.variables);
   const headers = useAppSelector((state) => state.editor.headers);
   const url = useAppSelector((state) => state.editor.url);
+  const [endpoint, setEndPoint] = useState(url);
   const [fetch] = useLazyGetDataQuery();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setUrl(event.target.value));
+    setEndPoint(event.target.value);
   };
 
   const runHandler = () => {
@@ -48,6 +50,10 @@ const EditorHeader = () => {
     }
   };
 
+  const refetchSchema = () => {
+    dispatch(setUrl(endpoint));
+  };
+
   return (
     <Flex gap={10}>
       <Button type="default" onClick={runHandler}>
@@ -57,9 +63,9 @@ const EditorHeader = () => {
         Prettify
       </Button>
       <Compact style={{ width: '100%' }}>
-        <Input value={url} onChange={handleChange} placeholder="https://graphql-endpoint.com" />
+        <Input value={endpoint} onChange={handleChange} placeholder="https://graphql-endpoint.com" />
         <Tooltip placement="topLeft" title="Re-fetch schema">
-          <Button type="default" onClick={runHandler} icon={<SyncOutlined />} />
+          <Button type="default" onClick={refetchSchema} icon={<SyncOutlined />} />
         </Tooltip>
       </Compact>
     </Flex>

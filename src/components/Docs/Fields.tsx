@@ -4,6 +4,7 @@ import { Type } from './types';
 import { RootObject } from './Docs';
 import Link from 'antd/es/typography/Link';
 import Arguments from './Arguments';
+import { Divider, Flex } from 'antd';
 
 export const findNameType = (key: string, obj: Type, arr: string[] = []): string | null => {
   if (obj.name !== null && obj.ofType === null) {
@@ -41,19 +42,20 @@ const Fields = ({
   return (
     <>
       {(stack[stack.length - 1] as unknown as Type).fields && <Paragraph>fields</Paragraph>}
-
-      {}
       {(stack[stack.length - 1] as unknown as Type).fields?.map((item, index) => {
         return (
           <div key={index}>
-            <div>
+            <Flex wrap="wrap">
               <Link onClick={() => handleClickKey(item as unknown as IntrospectionField)}>{item.name}</Link>
-              <Arguments field={item as unknown as IntrospectionField} handleClickArgument={handleSearchTypes} />
-            </div>
-            <span>: </span>
-            <Link onClick={() => handleSearchTypes(findNameType('key', item.type))}>
-              {findNameType('value', item.type)}
-            </Link>
+              <Flex>
+                <Arguments field={item as unknown as IntrospectionField} handleClickArgument={handleSearchTypes} />
+              </Flex>
+              <>:</>
+              <Link onClick={() => handleSearchTypes(findNameType('key', item.type))}>
+                {findNameType('value', item.type)}
+              </Link>
+            </Flex>
+            <Divider />
           </div>
         );
       })}
