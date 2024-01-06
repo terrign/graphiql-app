@@ -16,7 +16,6 @@ const EditorHeader = () => {
   const url = useAppSelector((state) => state.editor.url);
   const [endpoint, setEndPoint] = useState(url);
   const [fetch] = useLazyGetDataQuery();
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEndPoint(event.target.value);
   };

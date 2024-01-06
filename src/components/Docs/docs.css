@@ -6,10 +6,11 @@
   top: 135px;
   height: calc(100dvh - 285px);
   background-color: #353a3d;
-  border-left: 10px solid #211d1d;
+  /* border-left: 10px solid #211d1d; */
   border-radius: 4px;
   transition: all 0.3s ease-in-out;
   padding: 0 15px;
+  overflow-y: auto;
 }
 
 .docs-visible {

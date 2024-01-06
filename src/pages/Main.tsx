@@ -2,7 +2,7 @@ import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from '../auth';
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FloatButton, Layout, Spin } from 'antd';
+import { App, FloatButton, Layout, Spin } from 'antd';
 import GraphqlEditor from '../components/Editor';
 import { useGetSchemaQuery } from '../store/api';
 import { IntrospectionSchema } from 'graphql';
@@ -16,11 +16,19 @@ const Main = () => {
   const [docsVisibility, setDocsVisibility] = useState(false);
   const [schema, setSchema] = useState<IntrospectionSchema | null>(null);
   const url = useAppSelector((state) => state.editor.url);
-  const { data, isLoading, isFetching } = useGetSchemaQuery({ url });
+  const { data, isError, error, isLoading, isFetching } = useGetSchemaQuery({ url });
+  const { notification } = App.useApp();
 
   useEffect(() => {
     if (!isFetching && data?.__schema) {
       setSchema(data.__schema);
+    }
+    if (isError) {
+      notification.error({
+        message: 'Url error',
+        description: 'Wrong url, check it please',
+        placement: 'topRight',
+      });
     }
   }, [isFetching, url, data]);
 
@@ -32,7 +40,7 @@ const Main = () => {
   return (
     <Layout style={{ marginTop: 64, height: '100%' }}>
       <GraphqlEditor />
-      {!isFetching && (
+      {!error && !isFetching && (
         <FloatButton
           style={{ bottom: 100 }}
           onClick={() => {

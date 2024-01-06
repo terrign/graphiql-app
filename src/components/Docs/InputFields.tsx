@@ -1,6 +1,6 @@
 import { IntrospectionField, IntrospectionType, IntrospectionInputValue, __Field, __InputValue, __Type } from 'graphql';
 import { RootObject } from './Docs';
-import { findNameType } from './Fields';
+import { findType } from './findType';
 import { Type } from './types';
 import Link from 'antd/es/typography/Link';
 
@@ -23,9 +23,7 @@ const InputFields = ({
               <Link onClick={() => handleClickKey(item as unknown as IntrospectionInputValue)}>{item.name}</Link>
             </div>
             <>: </>
-            <Link onClick={() => handleSearchTypes(findNameType('key', item.type))}>
-              {findNameType('value', item.type)}
-            </Link>
+            <Link onClick={() => handleSearchTypes(findType('key', item.type))}>{findType('value', item.type)}</Link>
           </div>
         );
       })}
