@@ -29,8 +29,6 @@ const dynamicBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
     api.dispatch({ type: 'STOP_LOADING' });
     throw error;
   }
-
-  return rawBaseQuery({ ...(args as FetchArgs), url }, api, extraOptions);
 };
 
 export const api = createApi({
