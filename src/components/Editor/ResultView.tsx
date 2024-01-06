@@ -3,7 +3,7 @@ import { Hourglass } from 'react-loader-spinner';
 import { useAppSelector } from '../../store/hooks';
 import Editor from './Editor';
 
-const ResultView = ({ className }: { className: string }) => {
+export const ResultView = ({ className }: { className: string }) => {
   const queryCacheKey = useAppSelector((state) => state.editor.queryCacheKey);
   const error = useAppSelector((state) => state.editor.response);
   const api = useAppSelector((state) => state.api);

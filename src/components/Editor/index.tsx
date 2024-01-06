@@ -9,7 +9,7 @@ import Compact from 'antd/es/space/Compact';
 import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 
-const GraphqlEditor = () => {
+export const GraphqlEditor = () => {
   const [showHeaders, setShowHeaders] = useState<boolean>(false);
   const [showVariables, setShowVariables] = useState<boolean>(false);
   const showHeadersHandler = () => {
@@ -26,7 +26,7 @@ const GraphqlEditor = () => {
     setShowVariables(false);
   };
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div data-testid="graphqlEditor" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <EditorHeader />
       <div className="editor">
         <QueryEditor className="editor__query" />
