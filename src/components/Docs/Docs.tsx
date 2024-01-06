@@ -8,6 +8,7 @@ import Root from './Root';
 import Fields from './Fields';
 import { Type } from './types';
 import InputFields from './InputFields';
+import { useLocalization } from '../../store/localization.context';
 
 export interface RootObject {
   name: string;
@@ -24,6 +25,7 @@ const Docs = ({ visibility, schema }: { visibility: boolean; schema: Introspecti
   const [description, setDescription] = useState<string>('');
   const [showBtnBack, setShowBtnBack] = useState(false);
   const [valueBtnBack, setValueBtnBack] = useState<string>('');
+  const localization = useLocalization();
 
   useEffect(() => {
     if (schema) {
@@ -51,8 +53,8 @@ const Docs = ({ visibility, schema }: { visibility: boolean; schema: Introspecti
       setShowBtnBack(false);
     }
     if (stack.length === 1) {
-      setDescription('A GraphQL schema provides a root type for each kind of operation.');
-      setNameHeader('Documentation Explorer');
+      setDescription(localization.t.docs.rootDesc);
+      setNameHeader(localization.t.docs.rootHeader);
     } else if (stack.length > 1) {
       setNameHeader(String(stack[stack.length - 1].name));
       setValueBtnBack(String(stack[stack.length - 1].name));
@@ -64,12 +66,12 @@ const Docs = ({ visibility, schema }: { visibility: boolean; schema: Introspecti
       if (stack[stack.length - 1].description) {
         setDescription(String(stack[stack.length - 1].description));
       } else {
-        setDescription('No description');
+        setDescription(localization.t.docs.noDescription);
       }
     } else if (stack.length === 0) {
-      setNameHeader('Documentation explorer');
+      setNameHeader(localization.t.docs.rootHeader);
     }
-  }, [stack]);
+  }, [stack, localization]);
 
   const setStackDescription = (item: IntrospectionType | IntrospectionField | IntrospectionInputValue | undefined) => {
     if (item) {
@@ -77,7 +79,7 @@ const Docs = ({ visibility, schema }: { visibility: boolean; schema: Introspecti
       if (item.description) {
         setDescription(String(item.description));
       } else {
-        setDescription('No description');
+        setDescription(localization.t.docs.noDescription);
       }
     }
   };
@@ -102,7 +104,7 @@ const Docs = ({ visibility, schema }: { visibility: boolean; schema: Introspecti
     if (stack[stack.length - 2].description) {
       setDescription(String(stack[stack.length - 2].description));
     } else {
-      setDescription('No description');
+      setDescription(localization.t.docs.noDescription);
     }
   };
 

@@ -6,6 +6,7 @@ import Link from 'antd/es/typography/Link';
 import Arguments from './Arguments';
 import { Divider, Flex } from 'antd';
 import { findType } from './findType';
+import { useLocalization } from '../../store/localization.context';
 
 const Fields = ({
   stack,
@@ -16,9 +17,10 @@ const Fields = ({
   handleSearchTypes: (value: string | null) => void;
   handleClickKey: (item: IntrospectionField | IntrospectionInputValue) => void;
 }) => {
+  const localization = useLocalization();
   return (
     <>
-      {(stack[stack.length - 1] as unknown as Type).fields && <Paragraph>fields</Paragraph>}
+      {(stack[stack.length - 1] as unknown as Type).fields && <Paragraph>{localization.t.docs.fields}</Paragraph>}
       {(stack[stack.length - 1] as unknown as Type).fields?.map((item, index) => {
         return (
           <div key={index}>

@@ -2,6 +2,7 @@ import { IntrospectionType } from 'graphql';
 import { RootObject } from './Docs';
 import Title from 'antd/es/typography/Title';
 import Link from 'antd/es/typography/Link';
+import { useLocalization } from '../../store/localization.context';
 
 const Root = ({
   handleClickRoot,
@@ -11,9 +12,10 @@ const Root = ({
   stack: Array<RootObject>;
 }) => {
   const { rootFields, schemaFields } = stack[0];
+  const localization = useLocalization();
   return (
     <>
-      <Title level={5}>Root types</Title>
+      <Title level={5}>{localization.t.docs.rootTypes}</Title>
       {rootFields.map((field, ind) => {
         return (
           <div key={`root-type${ind}`}>
@@ -23,7 +25,7 @@ const Root = ({
           </div>
         );
       })}
-      <Title level={5}>All schema types</Title>
+      <Title level={5}>{localization.t.docs.schemaTypes}</Title>
       {schemaFields.map((field, ind) => {
         return (
           <div key={`root-type${ind}`}>
