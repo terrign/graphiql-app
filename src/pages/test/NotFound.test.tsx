@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-// import { test } from 'vitest';
 import { LocalizationProvider } from '../../store/localization.context';
 import NotFound from '../NotFound';
 import { MemoryRouter } from 'react-router-dom';
