@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import Docs from './Docs';
-import { LocalizationProvider } from '../../store/localization.context';
+import { fireEvent, render, screen } from '@testing-library/react';
+import Docs from '../Docs';
+import { LocalizationProvider } from '../../../store/localization.context';
 import { getIntrospectionQuery } from 'graphql';
 
-async function GraphQLInitialService() {
+async function fetchSchema() {
   const response = await fetch('https://rickandmortyapi.com/graphql', {
     method: 'POST',
     headers: {
@@ -23,7 +23,7 @@ async function GraphQLInitialService() {
 }
 
 describe('Docs component', async () => {
-  const schema = await GraphQLInitialService();
+  const schema = await fetchSchema();
   it('renders the component with root fields', async () => {
     render(
       <LocalizationProvider>
@@ -72,5 +72,17 @@ describe('Docs component', async () => {
     );
     const rootComponent = screen.getByTestId('root-elem');
     expect(rootComponent).toBeInTheDocument();
+  });
+
+  it('displays the fields', () => {
+    render(
+      <LocalizationProvider>
+        <Docs visibility={true} schema={schema} />
+      </LocalizationProvider>,
+    );
+    const rootComponent = screen.getByText(/query/i);
+    fireEvent.click(rootComponent);
+    const field = screen.getByText(/episodesByIds/i);
+    expect(field).toBeInTheDocument();
   });
 });
