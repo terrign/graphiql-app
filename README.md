@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+###GraphiQL App
+Welcome to our GraphiQL-based React application.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The application is built using Vite, React and TypeScript.
 
-Currently, two official plugins are available:
+Installation
+Before installing, make sure you have Node.js and npm installed on your machine. Then, clone the repository ([https://github.com/terrign/graphiql-app.git](https://github.com/terrign/graphiql-app.git)) and navigate to the project directory.
+Run npm install to install the dependencies
+Please, pay attention to install the following package as follows: npm i -D @remix-run/web-fetch abort-controller --legacy-peer-deps
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+After the installation is finished, you should be able to use the app.
 
-## Expanding the ESLint configuration
+Scripts
+The application provides several scripts to aid development:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+dev: Starts the development server.
+build: Builds the application for production.
+lint: Lints the application files.
+lint:fix: Lints the application files and automatically fixes any issues.
+preview: Previews the built application.
+format:fix: Formats the application files.
+format:check: Checks if the application files are properly formatted.
+test: Runs the tests.
+test:run: Runs the tests with coverage enabled.
 
-- Configure the top-level `parserOptions` property like this:
+You can run these scripts using the command npm run
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+Tests
+You can run tests using the command npm run test
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+To see the test coverage, please, use the command npm run test:run
