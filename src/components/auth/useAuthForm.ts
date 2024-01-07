@@ -15,7 +15,7 @@ interface UseAuthFormProps {
 const useAuthForm = ({ form, error, action }: UseAuthFormProps) => {
   const nav = useNavigate();
   const { notification } = App.useApp();
-  const loc = useLocalization();
+  const { t } = useLocalization();
 
   const onSubmit = async () => {
     const { email, password } = form.getFieldsValue();
@@ -28,12 +28,12 @@ const useAuthForm = ({ form, error, action }: UseAuthFormProps) => {
   useEffect(() => {
     if (error) {
       notification.error({
-        message: loc.t[error.code as ErrorCode].message || error.code,
-        description: loc.t[error.code as ErrorCode].description || error.message,
+        message: t[error.code as ErrorCode].message || error.code,
+        description: t[error.code as ErrorCode].description || error.message,
         placement: 'topRight',
       });
     }
-  }, [error, notification, loc.t]);
+  }, [error, notification]);
 
   return onSubmit;
 };

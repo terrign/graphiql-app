@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, coverageConfigDefaults } from 'vitest/config';
 
 export default defineConfig({
   resolve: {
@@ -21,6 +21,7 @@ export default defineConfig({
       reporter: ['text', 'html'],
       reportsDirectory: './tests/unit/coverage',
       include: ['src/**'],
+      exclude: [...coverageConfigDefaults.exclude, 'src/main.tsx', 'src/**/*.d.ts', 'src/**/types.ts'],
     },
   },
 });

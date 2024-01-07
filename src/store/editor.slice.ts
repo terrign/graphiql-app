@@ -5,13 +5,17 @@ export interface EditorState {
   query: string;
   headers: string;
   variables: string;
+  queryCacheKey: string;
+  response: string;
 }
 
 const initialState: EditorState = {
-  url: '',
+  url: 'https://rickandmortyapi.com/graphql',
   query: '',
   headers: '',
   variables: '',
+  queryCacheKey: '',
+  response: '',
 };
 
 export const editorSlice = createSlice({
@@ -30,10 +34,16 @@ export const editorSlice = createSlice({
     setUrl: (state, action) => {
       state.url = action.payload;
     },
+    setQueryCacheKey: (state, action) => {
+      state.queryCacheKey = action.payload;
+    },
+    setResponse: (state, action) => {
+      state.response = action.payload;
+    },
   },
 });
 
-export const { setQuery, setHeaders, setVariables, setUrl } = editorSlice.actions;
+export const { setQuery, setHeaders, setVariables, setUrl, setQueryCacheKey, setResponse } = editorSlice.actions;
 
 const editor = editorSlice.reducer;
 
