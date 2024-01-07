@@ -27,3 +27,13 @@
   padding: 0 15px;
   overflow-y: auto;
 }
+
+@media (hover: none) {
+  .docs-invisible {
+    display: none;
+  }
+
+  .docs-visible {
+    display: block;
+  }
+}
