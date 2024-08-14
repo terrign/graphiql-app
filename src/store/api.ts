@@ -1,7 +1,6 @@
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getIntrospectionQuery, IntrospectionQuery } from 'graphql';
-import { gql } from 'graphql-request';
 import { RootState } from './index';
 
 interface RequestBody {
@@ -21,16 +20,24 @@ const dynamicBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
 ) => {
   const url = (api.getState() as RootState).editor.url;
 
-  return rawBaseQuery({ ...(args as FetchArgs), url }, api, extraOptions);
+  api.dispatch({ type: 'START_LOADING' });
+  try {
+    const result = await rawBaseQuery({ ...(args as FetchArgs), url }, api, extraOptions);
+    api.dispatch({ type: 'STOP_LOADING' });
+    return result;
+  } catch (error) {
+    api.dispatch({ type: 'STOP_LOADING' });
+    throw error;
+  }
 };
 
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: dynamicBaseQuery,
   endpoints: ({ query }) => ({
-    getSchema: query<IntrospectionQuery, void>({
-      query: () => ({
-        url: '/',
+    getSchema: query({
+      query: ({ url }) => ({
+        url,
         method: 'POST',
         body: {
           query: getIntrospectionQuery(),
@@ -40,20 +47,26 @@ export const api = createApi({
         return data;
       },
     }),
-    getData: query<Record<string, unknown>, RequestBody>({
+    getData: query<string, RequestBody>({
       query: ({ document, headers, variables }) => ({
         url: '/',
         method: 'POST',
         body: {
-          query: gql`
-            ${document}
-          `,
+          query: document,
           variables,
         },
         headers,
       }),
+      transformResponse: (data: Record<string, unknown>) => {
+        return JSON.stringify(data, null, 2);
+      },
+      transformErrorResponse: (error) => {
+        if (!error.data) return null;
+
+        return JSON.stringify(error.data, null, 2);
+      },
     }),
   }),
 });
 
-export const { useLazyGetSchemaQuery, useLazyGetDataQuery } = api;
+export const { useLazyGetSchemaQuery, useLazyGetDataQuery, endpoints, useGetDataQuery, useGetSchemaQuery } = api;

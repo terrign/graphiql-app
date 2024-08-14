@@ -26,7 +26,7 @@ function Editor({ onChange, isJson, value, className, readOnly, isLight }: Edito
       onChange={onChange}
       readOnly={readOnly}
       height="100%"
-      style={{ flex: '1 1 auto' }}
+      style={{ flex: '1 1 0', overflow: 'auto' }}
     />
   );
 }
